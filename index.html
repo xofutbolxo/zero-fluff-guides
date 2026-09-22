@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
 <title>Zero Fluff Guides</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,12 +20,16 @@
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
+  html{background:var(--paper);}
   body{
     background:var(--paper);
     color:var(--ink);
     font-family:'Lora', Georgia, serif;
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-color-scheme: dark){
+    html,body{background:var(--paper) !important;color:var(--ink) !important;}
   }
   h1,h2,h3,.head{
     font-family:'Oswald', 'Arial Narrow', sans-serif;
@@ -44,10 +49,32 @@
   .nav-mark{
     font-family:'Oswald',sans-serif;
     font-weight:600;
-    font-size:15px;
+    font-size:14px;
     letter-spacing:0.02em;
+    line-height:1.05;
   }
-  .nav-mark b{background:var(--ink);color:var(--paper);padding:1px 5px;}
+  .nav-mark .nav-top{display:flex;align-items:stretch;}
+  .nav-mark .nav-zero{
+    border:1.5px solid var(--ink);
+    background:var(--paper);
+    padding:5px 7px;
+    display:flex;
+    align-items:center;
+  }
+  .nav-mark .nav-fluff{
+    background:var(--ink);
+    color:var(--paper);
+    padding:5px 7px;
+    display:flex;
+    align-items:center;
+  }
+  .nav-mark .nav-guides{
+    display:block;
+    font-size:12px;
+    letter-spacing:0.06em;
+    margin-top:2px;
+    margin-left:8.5px;
+  }
   .nav-links{display:flex;gap:22px;font-size:14px;font-family:'Oswald',sans-serif;font-weight:500;}
   .nav-links a{text-decoration:none;border-bottom:1px solid transparent;}
   .nav-links a:hover{border-bottom:1px solid var(--ink);}
@@ -61,14 +88,16 @@
     line-height:0.92;
     display:inline-block;
   }
-  .wordmark .zero{color:var(--ink);}
-  .wordmark .fluff{background:var(--ink);color:var(--paper);padding:0 6px;}
+  .wordmark-top{display:flex;align-items:stretch;}
+  .wordmark .zero{color:var(--ink);border:3px solid var(--ink);background:var(--paper);padding:16px 18px;display:flex;align-items:center;}
+  .wordmark .fluff{background:var(--ink);color:var(--paper);padding:16px 18px;display:flex;align-items:center;}
   .wordmark-sub{
     font-family:'Oswald',sans-serif;
     font-weight:600;
     font-size:clamp(28px,6vw,44px);
     display:block;
     margin-top:2px;
+    margin-left:21px;
   }
   .tagline{
     font-family:'Lora',serif;
@@ -177,7 +206,10 @@
 
 <nav>
   <div class="wrap">
-    <div class="nav-mark"><b>ZERO</b>FLUFF GUIDES</div>
+    <div class="nav-mark">
+      <span class="nav-top"><span class="nav-zero">ZERO</span><span class="nav-fluff">FLUFF</span></span>
+      <span class="nav-guides">GUIDES</span>
+    </div>
     <div class="nav-links">
       <a href="#books">Books</a>
       <a href="#about">About</a>
@@ -188,7 +220,7 @@
 <header class="hero">
   <div class="wrap">
     <div class="wordmark">
-      <span class="zero">ZERO</span><span class="fluff">FLUFF</span>
+      <span class="wordmark-top"><span class="zero">ZERO</span><span class="fluff">FLUFF</span></span>
       <span class="wordmark-sub">GUIDES</span>
     </div>
     <p class="tagline">Straight answers, real numbers, no padding. Pick a problem, get the exact steps to fix it.</p>
