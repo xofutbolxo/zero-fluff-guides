@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zero Fluff Guides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --paper:#F3F3EF;
+    --paper-line:#D8D6CC;
+    --finance:#21694A;
+    --diy:#C1571B;
+    --productivity:#2A4B7C;
+    --muted:#5B5A54;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Lora', Georgia, serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.head{
+    font-family:'Oswald', 'Arial Narrow', sans-serif;
+    text-transform:none;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav{
+    border-bottom:1px solid var(--paper-line);
+    padding:18px 0;
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;}
+  .nav-mark{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.02em;
+  }
+  .nav-mark b{background:var(--ink);color:var(--paper);padding:1px 5px;}
+  .nav-links{display:flex;gap:22px;font-size:14px;font-family:'Oswald',sans-serif;font-weight:500;}
+  .nav-links a{text-decoration:none;border-bottom:1px solid transparent;}
+  .nav-links a:hover{border-bottom:1px solid var(--ink);}
+
+  /* HERO */
+  .hero{padding:72px 0 56px;}
+  .wordmark{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(48px,10vw,84px);
+    line-height:0.92;
+    display:inline-block;
+  }
+  .wordmark .zero{color:var(--ink);}
+  .wordmark .fluff{background:var(--ink);color:var(--paper);padding:0 6px;}
+  .wordmark-sub{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:clamp(28px,6vw,44px);
+    display:block;
+    margin-top:2px;
+  }
+  .tagline{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--muted);
+    max-width:38ch;
+    margin-top:22px;
+  }
+
+  /* SECTION LABEL */
+  .section-label{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.03em;
+    color:var(--muted);
+    padding-bottom:10px;
+    border-bottom:2px solid var(--ink);
+    margin-bottom:0;
+  }
+
+  /* BOOK LIST */
+  .books{padding:48px 0 20px;}
+  .book-row{
+    display:flex;
+    gap:18px;
+    padding:26px 0;
+    border-bottom:1px solid var(--paper-line);
+    align-items:flex-start;
+  }
+  .book-row:first-of-type{padding-top:28px;}
+  .niche-tab{
+    width:5px;
+    align-self:stretch;
+    flex-shrink:0;
+    margin-top:3px;
+  }
+  .niche-tab.finance{background:var(--finance);}
+  .niche-tab.diy{background:var(--diy);}
+  .niche-tab.productivity{background:var(--productivity);}
+  .book-body{flex:1;min-width:0;}
+  .book-meta{
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.03em;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    margin-bottom:6px;
+  }
+  .niche-name.finance{color:var(--finance);}
+  .niche-name.diy{color:var(--diy);}
+  .niche-name.productivity{color:var(--productivity);}
+  .pen-name{color:var(--muted);font-weight:500;}
+  .book-title{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  .book-hook{
+    font-size:16px;
+    color:#2A2A26;
+    max-width:56ch;
+  }
+  .book-cta{
+    display:inline-block;
+    margin-top:10px;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:1px;
+  }
+  .placeholder-note{
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    color:#9A8F6E;
+    margin-top:10px;
+    font-style:normal;
+    letter-spacing:0.01em;
+  }
+
+  /* ABOUT */
+  .about{padding:20px 0 60px;}
+  .about p{max-width:60ch;font-size:16px;color:#2A2A26;}
+
+  footer{
+    border-top:1px solid var(--paper-line);
+    padding:26px 0 40px;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.01em;
+  }
+
+  @media (max-width:520px){
+    .book-meta{flex-wrap:wrap;row-gap:4px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark"><b>ZERO</b>FLUFF GUIDES</div>
+    <div class="nav-links">
+      <a href="#books">Books</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="wordmark">
+      <span class="zero">ZERO</span><span class="fluff">FLUFF</span>
+      <span class="wordmark-sub">GUIDES</span>
+    </div>
+    <p class="tagline">Straight answers, real numbers, no padding. Pick a problem, get the exact steps to fix it.</p>
+  </div>
+</header>
+
+<section class="books" id="books">
+  <div class="wrap">
+    <div class="section-label">THE LIBRARY</div>
+
+    <!-- REAL BOOK — verified copy -->
+    <div class="book-row">
+      <div class="niche-tab finance"></div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name finance">Personal Finance</span>
+          <span class="pen-name">Dan Orwin</span>
+        </div>
+        <div class="book-title">Building Your First 6 Month Emergency Fund</div>
+        <div class="book-hook">One car repair, vet bill, or missed paycheck puts you back on the credit card, because you have less than $1,000 in cash and no plan to change that. A step-by-step system that calculates your exact number, finds the dollars in your current income to fund it, and gets the account built and untouchable on a fixed timeline.</div>
+        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER — swap title/hook/link for the real thing -->
+    <div class="book-row">
+      <div class="niche-tab finance"></div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name finance">Personal Finance</span>
+          <span class="pen-name">Dan Orwin</span>
+        </div>
+        <div class="book-title">Debt Snowball Method</div>
+        <div class="book-hook">[Add the real Problem/Solution front-matter line for this book here.]</div>
+        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
+        <div class="placeholder-note">Placeholder row — confirm exact title + add live Amazon link</div>
+      </div>
+    </div>
+
+    <div class="book-row">
+      <div class="niche-tab finance"></div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name finance">Personal Finance</span>
+          <span class="pen-name">Dan Orwin</span>
+        </div>
+        <div class="book-title">Side Hustle Income</div>
+        <div class="book-hook">[Add the real Problem/Solution front-matter line for this book here.]</div>
+        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
+        <div class="placeholder-note">Placeholder row — confirm exact title + add live Amazon link</div>
+      </div>
+    </div>
+
+    <div class="book-row">
+      <div class="niche-tab productivity"></div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name productivity">Productivity</span>
+          <span class="pen-name">Cole Ashford</span>
+        </div>
+        <div class="book-title">Task Batching</div>
+        <div class="book-hook">[Add the real Problem/Solution front-matter line for this book here.]</div>
+        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
+        <div class="placeholder-note">Placeholder row — confirm exact title + add live Amazon link</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-label">WHAT THIS IS</div>
+    <p style="margin-top:20px;">Zero Fluff Guides are short, direct books built around one problem and one working plan to fix it. No filler chapters, no vague encouragement — real numbers, real steps, and a checklist you can actually finish.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Comwares Inc. — Zero Fluff Guides</div>
+</footer>
+
+</body>
+</html>
