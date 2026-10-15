@@ -52,7 +52,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;}
 .ws-private strong{font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.01em;}
 
 /* TOOLBAR */
-.ws-tools{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px;align-items:center;}
+.ws-tools{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px;align-items:center;max-width:100%;}
 .btn{
   font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.02em;
   border:2px solid var(--ink);background:var(--ink);color:var(--paper);
@@ -63,6 +63,11 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;}
 .btn.link{border:none;background:none;color:var(--muted);padding:6px 0;min-height:0;text-decoration:underline;font-weight:500;}
 .btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
 .ws-saved{font-family:'Oswald',sans-serif;font-size:13px;color:var(--muted);}
+.ws-saved-line{margin:2px 0 0;}
+.ws-ios-tip{margin:6px 0 0;max-width:60ch;}
+.btn.clear{border-color:transparent;background:transparent;color:#A3482A;font-weight:500;text-decoration:underline;text-underline-offset:3px;padding:10px 6px;margin-left:auto;}
+.btn.clear:hover{color:#7E3216;}
+@media (max-width:599px){.btn.clear{margin-left:0;padding-left:0;padding-right:0;}}
 
 /* JUMP LIST */
 .ws-jump{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px;}

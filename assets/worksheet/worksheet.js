@@ -115,6 +115,8 @@
   function setSaved(t) { if (savedEl) savedEl.textContent = t; }
 
   var today = new Date();
+  // iPhone/iPad (iPadOS reports itself as a Mac, so also check for touch)
+  var IOS = /iPad|iPhone|iPod/.test(navigator.userAgent || '') || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var THIS_MONTH = { y: today.getFullYear(), m: today.getMonth() };
 
   /* ---------- DOM helper ---------- */
@@ -655,7 +657,10 @@
       'Your answers are saved only in this browser on this device. Nothing is sent anywhere: no account, no sign-up, no tracking. Use Download to keep a copy, and Load to pick up on another device.'])),
     h('div', { 'class': 'ws-tools' }, [h('button', { type: 'button', 'class': 'btn', text: 'Download my answers', onclick: download }),
       h('button', { type: 'button', 'class': 'btn secondary', text: 'Load my answers', onclick: function () { fileIn.click(); } }),
-      h('button', { type: 'button', 'class': 'btn secondary', text: 'Print', onclick: function () { buildPrint(); window.print(); } }), savedEl]),
+      h('button', { type: 'button', 'class': 'btn secondary', text: 'Print', onclick: function () { buildPrint(); window.print(); } }),
+      h('button', { type: 'button', 'class': 'btn clear', text: 'Clear all my answers', onclick: clearAll })]),
+    h('p', { 'class': 'ws-saved-line' }, savedEl),
+    IOS ? h('p', { 'class': 'ws-help ws-ios-tip', text: 'On iPhone: tap the share icon, then Save to Files. To continue later, use Load my answers on this page (no need to open the file).' }) : null,
     jump]));
 
   for (var i = 0; i < BOOK.sections.length; i++) {
@@ -672,14 +677,17 @@
     main.appendChild(el);
   }
   }
+  // Clears only after the reader confirms; the page redraws empty without reloading.
+  function clearAll() {
+    if (!window.confirm('Clear all your answers on this device? This can\'t be undone. Download a copy first if you want to keep them.')) return;
+    clearTimeout(saveTimer);
+    try { window.localStorage.removeItem(KEY); } catch (e) {}
+    state = {}; applyDefaults(); renderMain(); buildPrint();
+    setSaved('All answers cleared on this device.');
+  }
   renderMain();
   root.appendChild(h('footer', null, h('div', { 'class': 'wrap' }, [
-    '© ' + today.getFullYear() + ' Comwares Inc. — Zero Fluff Guides · ', h('a', { href: '/privacy', text: 'Privacy' }), ' · ',
-    h('button', { type: 'button', 'class': 'btn link', text: 'Clear all my answers', onclick: function () {
-      if (!window.confirm('Clear every answer on this page? This can\'t be undone. Download a copy first if you want to keep them.')) return;
-      try { window.localStorage.removeItem(KEY); } catch (e) {}
-      state = {}; window.location.reload();
-    } })])));
+    '© ' + today.getFullYear() + ' Comwares Inc. — Zero Fluff Guides · ', h('a', { href: '/privacy', text: 'Privacy' })])));
   document.body.appendChild(h('div', { id: 'ws-print', 'aria-hidden': 'true' }));   // outside the page so print can show only this
   if (window.matchMedia) { var mq = window.matchMedia('print'); if (mq.addListener) mq.addListener(function (m) { if (m.matches) buildPrint(); }); }
   window.addEventListener('beforeprint', buildPrint);
