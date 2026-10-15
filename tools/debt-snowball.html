@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Debt Snowball Method: Worksheets | Zero Fluff Guides</title>
+<meta name="description" content="Free worksheets for Debt Snowball Method by Dan Orwin. Your answers stay on your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/worksheet/worksheet.css?v=2">
+</head>
+<body>
+<!-- One small file per book: everything book-specific is in the JSON below. The shared template is /assets/worksheet/. -->
+<div id="zfg-worksheet"></div>
+<noscript><p style="max-width:640px;margin:40px auto;padding:0 16px;font-family:Georgia,serif">This worksheet needs JavaScript turned on. Nothing is sent anywhere; your answers stay in your browser.</p></noscript>
+<script type="application/json" id="zfg-book">
+{
+ "slug": "debt-snowball",
+ "title": "Debt Snowball Method",
+ "subtitle": "Paying Off $30,000 in Debt in Under 3 Years",
+ "author": "Dan Orwin",
+ "niche": "Personal Finance",
+ "accent": "#21694A",
+ "accentSoft": "#E4EFE8",
+ "planSection": "conclusion",
+ "intro": "One section for each chapter. The links in the book jump straight to the matching section. Fill in what you have; the numbers update as you type.",
+ "sections": [
+  {
+   "id": "ch1",
+   "label": "Chapter 1",
+   "short": "Ch 1",
+   "title": "Why $30,000 in Debt Takes So Long to Shake",
+   "step": "List every debt you owe below, with its current balance, interest rate, and minimum payment.",
+   "fields": [
+    {
+     "type": "debts",
+     "key": "debts",
+     "placeholders": {
+      "name": "e.g. Store credit card",
+      "balance": "e.g. 2,200",
+      "rate": "e.g. 24",
+      "min": "e.g. 65"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ch2",
+   "label": "Chapter 2",
+   "short": "Ch 2",
+   "title": "How the Debt Snowball Method Works",
+   "step": "Rewrite your debt list in order from smallest balance to largest, ignoring interest rates.",
+   "fields": [
+    {
+     "type": "debtsSorted",
+     "order": "snowball",
+     "summary": "Smallest to largest"
+    },
+    {
+     "type": "note",
+     "text": "This list sorts itself as you fill in Chapter 1. Equal balances: the higher rate goes first."
+    }
+   ]
+  },
+  {
+   "id": "ch3",
+   "label": "Chapter 3",
+   "short": "Ch 3",
+   "title": "Snowball vs. Avalanche: Choosing Honestly",
+   "step": "Choose snowball, avalanche, or hybrid based on your actual track record, and write that one word at the top of your debt list.",
+   "fields": [
+    {
+     "type": "choice",
+     "key": "method",
+     "label": "Your method",
+     "summary": "Method",
+     "options": [
+      {
+       "value": "snowball",
+       "label": "Snowball",
+       "hint": "Smallest balance first. Fast wins keep you going."
+      },
+      {
+       "value": "avalanche",
+       "label": "Avalanche",
+       "hint": "Highest interest rate first. Costs less, but the first win can take longer."
+      },
+      {
+       "value": "hybrid",
+       "label": "Hybrid",
+       "hint": "Move specific debts to the top and leave the rest in balance order."
+      }
+     ]
+    },
+    {
+     "type": "hybridPicks",
+     "key": "hybridTop",
+     "label": "Which debts move to the top?",
+     "summary": "Moved to the top",
+     "showIf": {
+      "method": "hybrid"
+     },
+     "help": "Chapter 3's three cases: one debt at 25% or more while the rest sit well below it; a 0% promo that ends during your plan; or debts under $1,000 cleared first for quick wins."
+    },
+    {
+     "type": "debtsSorted",
+     "order": "method",
+     "label": "Your payoff order ({method})",
+     "summary": "Payoff order"
+    }
+   ]
+  },
+  {
+   "id": "ch4",
+   "label": "Chapter 4",
+   "short": "Ch 4",
+   "title": "Listing Every Debt and Finding Your Real Numbers",
+   "step": "Write your baseline payoff date, the month your last debt clears if you pay only the minimums, at the bottom of your debt inventory.",
+   "fields": [
+    {
+     "type": "monthYear",
+     "key": "startMonth",
+     "label": "Month of your first payment on this plan",
+     "summary": "Plan starts",
+     "help": "Until you pick one, the dates on this page count from this month."
+    },
+    {
+     "type": "baseline",
+     "help": "Assumes you keep paying today's minimum on each debt until it's gone, the best case. If you pay whatever the statement asks, the shrinking minimum makes it take far longer."
+    }
+   ]
+  },
+  {
+   "id": "ch5",
+   "label": "Chapter 5",
+   "short": "Ch 5",
+   "title": "Building a Budget That Finds Extra Cash",
+   "step": "Write one fixed monthly extra-payment amount, rounded down from what your 90-day audit found, as its own line in your budget.",
+   "fields": [
+    {
+     "type": "money",
+     "key": "extra",
+     "label": "Fixed monthly extra payment",
+     "summary": "Extra payment each month",
+     "narrow": true,
+     "help": "Round down from what your 90-day audit found. Pick a number you can hit in a bad month.",
+     "placeholder": "e.g. 250"
+    },
+    {
+     "type": "monthlyTotal"
+    }
+   ]
+  },
+  {
+   "id": "ch6",
+   "label": "Chapter 6",
+   "short": "Ch 6",
+   "title": "Starter Emergency Fund and Stopping New Debt",
+   "step": "Open a savings account at a different bank from your checking, name it \"Emergency Only,\" and set an automatic transfer into it until it reaches $1,000.",
+   "fields": [
+    {
+     "type": "checkbox",
+     "key": "efOpened",
+     "label": "Savings account opened at a different bank and named \"Emergency Only\"",
+     "summary": "Account opened"
+    },
+    {
+     "type": "money",
+     "key": "efTransfer",
+     "label": "Automatic transfer, per month",
+     "summary": "Automatic transfer",
+     "narrow": true,
+     "placeholder": "e.g. 100"
+    },
+    {
+     "type": "money",
+     "key": "efSaved",
+     "label": "Saved so far",
+     "summary": false,
+     "narrow": true,
+     "placeholder": "e.g. 0"
+    },
+    {
+     "type": "goalProgress",
+     "goal": 1000,
+     "savedKey": "efSaved",
+     "perMonthKey": "efTransfer",
+     "label": "Starter emergency fund",
+     "summary": "Saved so far"
+    }
+   ]
+  },
+  {
+   "id": "ch7",
+   "label": "Chapter 7",
+   "short": "Ch 7",
+   "title": "Raising Income to Reach $30,000 Faster",
+   "step": "Pick one income move from this chapter, either a raise request or a single side income option, and write its start date on your calendar today.",
+   "fields": [
+    {
+     "type": "choice",
+     "key": "incomeMove",
+     "label": "Your one income move",
+     "summary": "Income move",
+     "options": [
+      {
+       "value": "raise",
+       "label": "Ask for a raise"
+      },
+      {
+       "value": "freelance",
+       "label": "Freelancing"
+      },
+      {
+       "value": "delivery",
+       "label": "Delivery and rideshare"
+      },
+      {
+       "value": "shifts",
+       "label": "Weekend and extra shifts"
+      },
+      {
+       "value": "resale",
+       "label": "Resale"
+      }
+     ]
+    },
+    {
+     "type": "date",
+     "key": "incomeStart",
+     "label": "Start date",
+     "summary": "Start date"
+    }
+   ]
+  },
+  {
+   "id": "ch8",
+   "label": "Chapter 8",
+   "short": "Ch 8",
+   "title": "Running the Snowball: Month-by-Month Mechanics",
+   "step": "Put a recurring 30-minute money review on your calendar for the same day every month, starting this month.",
+   "fields": [
+    {
+     "type": "dayOfMonth",
+     "key": "reviewDay",
+     "label": "Your monthly review day",
+     "summary": "Review day",
+     "help": "Thirty minutes, the same day every month, starting this month."
+    }
+   ]
+  },
+  {
+   "id": "ch9",
+   "label": "Chapter 9",
+   "short": "Ch 9",
+   "title": "Lowering Interest Costs Without Breaking the Method",
+   "step": "Call the lender on your highest-rate credit card this week and ask for a lower interest rate.",
+   "fields": [
+    {
+     "type": "debtSelect",
+     "key": "lenderDebt",
+     "label": "Which card (your highest rate)",
+     "summary": "Card"
+    },
+    {
+     "type": "date",
+     "key": "callDate",
+     "label": "Date of the call",
+     "summary": "Call date"
+    },
+    {
+     "type": "choice",
+     "key": "lenderResult",
+     "label": "Result",
+     "summary": "Result",
+     "options": [
+      {
+       "value": "lowered",
+       "label": "Rate lowered"
+      },
+      {
+       "value": "same",
+       "label": "No change"
+      },
+      {
+       "value": "later",
+       "label": "Not called yet"
+      }
+     ]
+    },
+    {
+     "type": "percent",
+     "key": "newRate",
+     "label": "New interest rate",
+     "summary": "New rate",
+     "narrow": true,
+     "showIf": {
+      "lenderResult": "lowered"
+     },
+     "help": "Your plan at the end of this page uses the new rate. Lowering a rate never changes your order.",
+     "placeholder": "e.g. 18"
+    }
+   ]
+  },
+  {
+   "id": "ch10",
+   "label": "Chapter 10",
+   "short": "Ch 10",
+   "title": "Staying Debt-Free After the Final Payment",
+   "step": "Write your five borrowing rules on one sheet of paper today and keep it with your financial paperwork.",
+   "fields": [
+    {
+     "type": "list",
+     "key": "rules",
+     "count": 5,
+     "itemLabel": "Rule",
+     "label": "Write your own five rules. The faint text shows the book's rules as examples.",
+     "placeholders": [
+      "e.g. Credit cards get paid in full every month. Autopay the full statement balance, not the minimum.",
+      "e.g. No loans for anything that loses value fast: no financing furniture, electronics, vacations or weddings.",
+      "e.g. Cars: pay cash from a car replacement fund. If I finance, 36 months at most, and the price under a third of my yearly gross income.",
+      "e.g. Mortgage: the full monthly payment stays at or under 25% of take-home pay, with at least 10% down (20% if I can).",
+      "e.g. Never cosign."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "conclusion",
+   "label": "Conclusion · The Math Was Never the Hard Part",
+   "short": "Your plan",
+   "title": "Your Plan at a Glance",
+   "step": "Set a calendar reminder for the month your last debt is projected to clear, title it \"Snowball becomes savings,\" and write in the note the exact monthly amount you'll redirect into savings that month.",
+   "fields": [
+    {
+     "type": "projection",
+     "reminderTitle": "Snowball becomes savings",
+     "reminderLabel": "Your reminder: ",
+     "help": "Assumes the extra payment goes to debt from your first month and every minimum stays fixed. Real statements vary a little."
+    },
+    {
+     "type": "summary",
+     "skip": "conclusion"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<script src="/assets/worksheet/worksheet.js?v=2"></script>
+</body>
+</html>
