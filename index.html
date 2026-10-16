@@ -175,13 +175,34 @@
     border-bottom:1px solid var(--ink);
     padding-bottom:1px;
   }
-  .placeholder-note{
+  .book-sub{
     font-family:'Oswald',sans-serif;
-    font-size:12px;
-    color:#9A8F6E;
+    font-weight:500;
+    font-size:15px;
+    color:var(--muted);
+    margin:-4px 0 10px;
+  }
+  .book-actions{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:8px 22px;
     margin-top:10px;
-    font-style:normal;
-    letter-spacing:0.01em;
+  }
+  .book-actions .book-cta{margin-top:0;}
+  .book-soon{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:#8C8A82;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+  .more-note{
+    font-style:italic;
+    color:var(--muted);
+    font-size:15px;
+    margin:22px 0 0;
   }
 
   /* ABOUT */
@@ -231,21 +252,6 @@
   <div class="wrap">
     <div class="section-label">THE LIBRARY</div>
 
-    <!-- REAL BOOK — verified copy -->
-    <div class="book-row">
-      <div class="niche-tab finance"></div>
-      <div class="book-body">
-        <div class="book-meta">
-          <span class="niche-name finance">Personal Finance</span>
-          <span class="pen-name">Dan Orwin</span>
-        </div>
-        <div class="book-title">Building Your First 6 Month Emergency Fund</div>
-        <div class="book-hook">One car repair, vet bill, or missed paycheck puts you back on the credit card, because you have less than $1,000 in cash and no plan to change that. A step-by-step system that calculates your exact number, finds the dollars in your current income to fund it, and gets the account built and untouchable on a fixed timeline.</div>
-        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
-      </div>
-    </div>
-
-    <!-- PLACEHOLDER — swap title/hook/link for the real thing -->
     <div class="book-row">
       <div class="niche-tab finance"></div>
       <div class="book-body">
@@ -254,40 +260,16 @@
           <span class="pen-name">Dan Orwin</span>
         </div>
         <div class="book-title">Debt Snowball Method</div>
-        <div class="book-hook">[Add the real Problem/Solution front-matter line for this book here.]</div>
-        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
-        <div class="placeholder-note">Placeholder row — confirm exact title + add live Amazon link</div>
-      </div>
-    </div>
-
-    <div class="book-row">
-      <div class="niche-tab finance"></div>
-      <div class="book-body">
-        <div class="book-meta">
-          <span class="niche-name finance">Personal Finance</span>
-          <span class="pen-name">Dan Orwin</span>
+        <div class="book-sub">Paying Off $30,000 in Debt in Under 3 Years</div>
+        <div class="book-hook">If you owe around $30,000 and pay the minimums, the balances barely move. This 60-page plan gives you a ranked payoff order, a budget that finds extra cash, and a month-by-month payment schedule, and you can read it in one evening. A free worksheet calculates your debt-free date and payoff order, and saves only on your own device.</div>
+        <div class="book-actions">
+          <span class="book-soon">Coming soon</span>
+          <a class="book-cta" href="/tools/debt-snowball">Free worksheet &nbsp;→</a>
         </div>
-        <div class="book-title">Side Hustle Income</div>
-        <div class="book-hook">[Add the real Problem/Solution front-matter line for this book here.]</div>
-        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
-        <div class="placeholder-note">Placeholder row — confirm exact title + add live Amazon link</div>
       </div>
     </div>
 
-    <div class="book-row">
-      <div class="niche-tab productivity"></div>
-      <div class="book-body">
-        <div class="book-meta">
-          <span class="niche-name productivity">Productivity</span>
-          <span class="pen-name">Cole Ashford</span>
-        </div>
-        <div class="book-title">Task Batching</div>
-        <div class="book-hook">[Add the real Problem/Solution front-matter line for this book here.]</div>
-        <a class="book-cta" href="#">Get it on Amazon &nbsp;→</a>
-        <div class="placeholder-note">Placeholder row — confirm exact title + add live Amazon link</div>
-      </div>
-    </div>
-
+    <p class="more-note">More Zero Fluff Guides on the way.</p>
   </div>
 </section>
 
