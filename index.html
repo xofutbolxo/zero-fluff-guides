@@ -29,6 +29,9 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   html{background:var(--paper);}
+  @media (prefers-reduced-motion: no-preference){
+    html{scroll-behavior:smooth;}
+  }
   body{
     background:var(--paper);
     color:var(--ink);
@@ -88,7 +91,7 @@
   .nav-links a:hover{border-bottom:1px solid var(--ink);}
 
   /* HERO */
-  .hero{padding:72px 0 56px;}
+  .hero{padding:72px 0 24px;}
   .wordmark{
     font-family:'Oswald',sans-serif;
     font-weight:700;
@@ -129,7 +132,7 @@
   }
 
   /* BOOK LIST */
-  .books{padding:48px 0 20px;}
+  .books{padding:28px 0 20px;}
   .book-row{
     display:flex;
     gap:18px;
@@ -214,7 +217,7 @@
   }
 
   /* ABOUT */
-  .about{padding:20px 0 60px;}
+  .about{padding:20px 0 60px;min-height:calc(100vh - 86px);min-height:calc(100lvh - 86px);} /* room below so "The Point" can scroll this heading to the top; 86px = footer height */
   .about p{max-width:60ch;font-size:16px;color:#2A2A26;}
 
   footer{
@@ -228,6 +231,8 @@
 
   @media (max-width:520px){
     .book-meta{flex-wrap:wrap;row-gap:4px;}
+    .hero{padding-bottom:16px;}
+    .books{padding-top:20px;}
   }
 </style>
 </head>
@@ -241,7 +246,7 @@
     </div>
     <div class="nav-links">
       <a href="#books">Books</a>
-      <a href="#about">About</a>
+      <a href="#about">The Point</a>
     </div>
   </div>
 </nav>
