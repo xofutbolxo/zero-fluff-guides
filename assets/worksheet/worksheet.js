@@ -69,6 +69,7 @@
 
   /* ---------- formatting ---------- */
 
+  var COPYRIGHT = '© 2026 Comwares Inc. — Zero Fluff Guides. All rights reserved.';   // same line as the homepage footer
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   function money(v, cents) {
     if (!(v === v) || v === null) return '';
@@ -609,6 +610,7 @@
       el.appendChild(div);
     }
     el.appendChild(h('div', { 'class': 'p-foot', text: 'zerofluffguides.com/tools/' + BOOK.slug + '. Your answers are stored only in your own browser.' }));
+    el.appendChild(h('div', { 'class': 'p-copy', text: COPYRIGHT }));
   }
   function printTable(ds, extraCol, extraHead) {
     var head = h('tr', null, [h('th', { text: '#' }), h('th', { text: 'Debt' }), h('th', { 'class': 'n', text: 'Balance' }), h('th', { 'class': 'n', text: 'Rate' }), h('th', { 'class': 'n', text: 'Minimum' })]);
@@ -687,7 +689,7 @@
   }
   renderMain();
   root.appendChild(h('footer', null, h('div', { 'class': 'wrap' }, [
-    '© ' + today.getFullYear() + ' Comwares Inc. — Zero Fluff Guides · ', h('a', { href: '/privacy', text: 'Privacy' })])));
+    COPYRIGHT + ' \u00a0·\u00a0 ', h('a', { href: '/privacy', text: 'Privacy' })])));
   document.body.appendChild(h('div', { id: 'ws-print', 'aria-hidden': 'true' }));   // outside the page so print can show only this
   if (window.matchMedia) { var mq = window.matchMedia('print'); if (mq.addListener) mq.addListener(function (m) { if (m.matches) buildPrint(); }); }
   window.addEventListener('beforeprint', buildPrint);
