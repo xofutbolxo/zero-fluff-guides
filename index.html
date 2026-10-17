@@ -10,9 +10,11 @@
 <meta property="og:description" content="Short, direct books built around one problem and one working plan to fix it. Real numbers, real steps, and free tools that do the math for you.">
 <meta property="og:url" content="https://zerofluffguides.com">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://zerofluffguides.com/assets/covers/debt-snowball.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Zero Fluff Guides">
 <meta name="twitter:description" content="Short, direct books built around one problem and one working plan to fix it. Real numbers, real steps, and free tools that do the math for you.">
+<meta name="twitter:image" content="https://zerofluffguides.com/assets/covers/debt-snowball.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -150,6 +152,9 @@
   .niche-tab.finance{background:var(--finance);}
   .niche-tab.diy{background:var(--diy);}
   .niche-tab.productivity{background:var(--productivity);}
+  .niche-tab.debt-snowball{background:#00EF00;}   /* the cover's green; niche text keeps the darker --finance */
+  .book-main{flex:1;min-width:0;display:flex;gap:22px;align-items:flex-start;}
+  .book-cover{width:150px;height:auto;flex-shrink:0;display:block;box-shadow:0 1px 4px rgba(0,0,0,0.18);}
   .book-body{flex:1;min-width:0;}
   .book-meta{
     font-family:'Oswald',sans-serif;
@@ -231,6 +236,8 @@
 
   @media (max-width:520px){
     .book-meta{flex-wrap:wrap;row-gap:4px;}
+    .book-main{flex-direction:column;gap:16px;}
+    .book-cover{width:140px;}
     .hero{padding-bottom:16px;}
     .books{padding-top:20px;}
   }
@@ -266,7 +273,9 @@
     <div class="section-label">THE LIBRARY</div>
 
     <div class="book-row">
-      <div class="niche-tab finance"></div>
+      <div class="niche-tab finance debt-snowball"></div>
+      <div class="book-main">
+      <img class="book-cover" src="/assets/covers/debt-snowball.jpg" width="600" height="957" alt="Debt Snowball Method by Dan Orwin cover">
       <div class="book-body">
         <div class="book-meta">
           <span class="niche-name finance">Personal Finance</span>
@@ -279,6 +288,7 @@
           <span class="book-soon">Coming soon</span>
           <a class="book-cta" href="/tools/debt-snowball">Free worksheet &nbsp;→</a>
         </div>
+      </div>
       </div>
     </div>
 
