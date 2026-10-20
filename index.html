@@ -242,7 +242,9 @@
     .book-meta{flex-wrap:wrap;row-gap:4px;}
     .book-main{flex-direction:column;gap:16px;}
     .book-cover{width:140px;}
-    .book-body{padding-left:23px;}   /* keeps the text lined up with the cover (5px strip + 18px gap) */
+    /* stacked layout: strip runs the full height of the entry (cover top to the Coming soon / worksheet line) */
+    .book-main{position:relative;padding-left:23px;}   /* 5px strip + 18px gap, keeps cover and text where they were */
+    .niche-tab{position:absolute;left:0;top:0;bottom:0;}
     .hero{padding-bottom:16px;}
     .books{padding-top:20px;}
   }
