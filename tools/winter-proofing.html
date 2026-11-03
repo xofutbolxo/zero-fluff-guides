@@ -49,6 +49,14 @@
      "narrow": true,
      "placeholder": "e.g. 1,080",
      "help": "This is your baseline. Chapter 10 puts next winter's total beside it."
+    },
+    {
+     "type": "text",
+     "key": "baseUsage",
+     "label": "Last winter's usage (therms, CCF or kWh — it's on your bill)",
+     "summary": "Last winter's usage",
+     "narrow": true,
+     "placeholder": "e.g. 800 therms"
     }
    ]
   },
@@ -60,10 +68,12 @@
    "step": "Pick four weekends before your area's average first frost date, put them on the calendar, and buy the basic tools this week: a caulk gun, utility knife, putty knife, tape measure and painter's tape.",
    "fields": [
     {
-     "type": "date",
+     "type": "text",
      "key": "frostDate",
      "label": "Your area's average first frost date",
-     "summary": "First frost date"
+     "summary": "First frost date",
+     "narrow": true,
+     "placeholder": "e.g. Oct 15, 2026"
     },
     {
      "type": "list",
@@ -72,10 +82,10 @@
      "itemLabel": "Weekend",
      "label": "Your four weekends, all before that date",
      "placeholders": [
-      "e.g. Sat Sep 12: leak hunt",
-      "e.g. Sat Sep 26: windows",
-      "e.g. Sat Oct 10: doors, outlets, attic hatch",
-      "e.g. Sat Oct 24: rim joist, water, cold room"
+      "e.g. Sat Sep 12, 2026: leak hunt + windows",
+      "e.g. Sat Sep 19, 2026: doors",
+      "e.g. Sat Sep 26, 2026: outlets, attic hatch, rim joist",
+      "e.g. Sat Oct 3, 2026: pipes, outdoor taps, main shutoff"
      ]
     },
     {
@@ -127,10 +137,12 @@
    "step": "On the next windy day, carry a lit incense stick past every window, door, outlet and the attic hatch, tagging each leak with numbered painter's tape and logging its spot and gap width, so you can buy everything on that log in a single trip.",
    "fields": [
     {
-     "type": "date",
+     "type": "text",
      "key": "huntDay",
      "label": "Leak hunt day (a windy one)",
-     "summary": "Leak hunt day"
+     "summary": "Leak hunt day",
+     "narrow": true,
+     "placeholder": "e.g. Sep 12, 2026"
     },
     {
      "type": "note",
@@ -139,7 +151,7 @@
     {
      "type": "list",
      "key": "leaks",
-     "count": 15,
+     "count": 20,
      "itemLabel": "Leak",
      "label": "Your leak log: number, spot and gap width",
      "placeholders": [
@@ -155,6 +167,14 @@
      "summary": "Shopping list",
      "rows": 3,
      "placeholder": "e.g. 3 tubes exterior caulk, 2 window film kits, 2 door sweeps, outlet gaskets"
+    },
+    {
+     "type": "money",
+     "key": "spent",
+     "label": "Total spent on materials",
+     "summary": "Total spent on materials",
+     "narrow": true,
+     "placeholder": "e.g. 360"
     },
     {
      "type": "checkbox",
@@ -399,8 +419,16 @@
      "label": "This winter's heating bills, added up",
      "summary": "This season total",
      "narrow": true,
-     "placeholder": "e.g. 918",
-     "help": "Put it beside your Chapter 1 baseline. A colder or milder winter changes the bill too, so note which it was."
+     "placeholder": "e.g. 918"
+    },
+    {
+     "type": "text",
+     "key": "newUsage",
+     "label": "This winter's usage",
+     "summary": "This winter's usage",
+     "narrow": true,
+     "placeholder": "e.g. 720 therms",
+     "help": "Compare usage, not just dollars, since prices change. A colder or milder winter changes it too, so note which it was."
     },
     {
      "type": "text",
@@ -412,7 +440,7 @@
     {
      "type": "list",
      "key": "recheck",
-     "count": 6,
+     "count": 8,
      "itemLabel": "Check",
      "label": "Your fall re-check list",
      "placeholders": [
@@ -421,7 +449,9 @@
       "e.g. Hoses off, outdoor taps drained and open",
       "e.g. Pipe sleeves still in place",
       "e.g. Test the CO alarms",
-      "e.g. Book the furnace service"
+      "e.g. Book the furnace service",
+      "e.g. Fresh shrink film on the windows",
+      "e.g. Main shutoff tag still on"
      ]
     }
    ]
@@ -449,5 +479,81 @@
 }
 </script>
 <script src="/assets/worksheet/worksheet.js?v=4"></script>
+<script>
+/* This page only (the shared template is unchanged): dates written as "Oct 15, 2026", and the Chapter 10
+   savings and payback line. Plain ES5, like the template. */
+(function () {
+  var root = document.getElementById('zfg-worksheet');
+  if (!root || !window.MutationObserver) return;
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  // "2026-10-15", "10/15/2026", "October 15 2026" or "oct 15, 2026" -> "Oct 15, 2026"; anything else stays as typed
+  function tidyDate(v) {
+    var s = String(v || '').replace(/^\s+|\s+$/g, ''), m, mo = -1, d, y;
+    if ((m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(s))) { y = +m[1]; mo = +m[2] - 1; d = +m[3]; }
+    else if ((m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s))) { mo = +m[1] - 1; d = +m[2]; y = +m[3]; }
+    else if ((m = /^([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})$/.exec(s))) {
+      for (var i = 0; i < 12; i++) if (m[1].slice(0, 3).toLowerCase() === MON[i].toLowerCase()) mo = i;
+      d = +m[2]; y = +m[3];
+    }
+    if (mo < 0 || mo > 11 || !(d >= 1 && d <= 31)) return s;
+    return MON[mo] + ' ' + d + ', ' + y;
+  }
+  function tidyInput(el) {
+    if (!el) return;
+    var t = tidyDate(el.value);
+    if (t === el.value) return;
+    el.value = t;
+    var ev;
+    try { ev = new Event('input', { bubbles: true }); } catch (e) { ev = document.createEvent('Event'); ev.initEvent('input', true, true); }
+    el.dispatchEvent(ev);   // the template saves on "input"
+  }
+
+  function amount(id) {
+    var el = document.getElementById(id);
+    var v = el ? String(el.value).replace(/[$,\s]/g, '') : '';
+    return v !== '' && !isNaN(+v) ? +v : null;
+  }
+  function dollars(x) {
+    var r = Math.round(x * 100) / 100;
+    return '$' + (r % 1 ? r.toFixed(2) : String(r)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  function payback() {
+    var line = document.getElementById('wp-payback');
+    if (!line) {
+      var anchor = document.getElementById('f-newUsage');
+      var field = anchor && anchor.parentNode;
+      if (!field) return;
+      line = document.createElement('p');
+      line.id = 'wp-payback';
+      line.className = 'ws-note';
+      line.setAttribute('aria-live', 'polite');
+      field.parentNode.insertBefore(line, field.nextSibling);
+    }
+    var spent = amount('f-spent'), before = amount('f-baseline'), after = amount('f-newSeason');
+    var saved = before !== null && after !== null ? before - after : null;
+    if (spent === null || saved === null || saved <= 0) { line.style.display = 'none'; line.textContent = ''; return; }
+    line.textContent = 'Saved this season: ' + dollars(saved) + '. Payback: about ' + (Math.round(spent / saved * 10) / 10) +
+      ' seasons (what you spent ÷ what you saved).';
+    line.style.display = '';
+  }
+
+  var busy = false;
+  function refresh() {
+    if (busy) return;
+    busy = true;
+    tidyInput(document.getElementById('f-frostDate'));
+    tidyInput(document.getElementById('f-huntDay'));
+    payback();
+    busy = false;
+  }
+  root.addEventListener('change', function (e) {
+    if (e.target && (e.target.id === 'f-frostDate' || e.target.id === 'f-huntDay')) tidyInput(e.target);
+  });
+  root.addEventListener('input', payback);
+  new MutationObserver(function () { if (!document.getElementById('wp-payback')) refresh(); }).observe(root, { childList: true, subtree: true });
+  refresh();
+})();
+</script>
 </body>
 </html>
