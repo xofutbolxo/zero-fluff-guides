@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Zero Fluff Guides</title>
+<meta name="description" content="Short, direct books built around one problem and one working plan to fix it. Real numbers, real steps, and free tools that do the math for you.">
+<meta property="og:title" content="Zero Fluff Guides">
+<meta property="og:description" content="Short, direct books built around one problem and one working plan to fix it. Real numbers, real steps, and free tools that do the math for you.">
+<meta property="og:url" content="https://zerofluffguides.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zero Fluff Guides">
+<meta property="og:image" content="https://zerofluffguides.com/assets/share/zero-fluff-guides-share.jpg?v=4">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zero Fluff Guides">
+<meta name="twitter:description" content="Short, direct books built around one problem and one working plan to fix it. Real numbers, real steps, and free tools that do the math for you.">
+<meta name="twitter:image" content="https://zerofluffguides.com/assets/share/zero-fluff-guides-share.jpg?v=4">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#141414;--paper:#F3F3EF;--paper-line:#D8D6CC;--card:#F9F9F6;
+    --finance:#21694A;--diy:#C1571B;--productivity:#2A4B7C;--womens-health:#B0287A;--muted:#5B5A54;--side:280px;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;} html{background:var(--paper);}
+  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth;} }
+  body{background:var(--paper);color:var(--ink);font-family:'Lora',Georgia,serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  @media (prefers-color-scheme: dark){ html,body{background:var(--paper) !important;color:var(--ink) !important;} }
+  h1,h2,h3{font-family:'Oswald','Arial Narrow',sans-serif;letter-spacing:0.01em;margin:0;}
+  a{color:inherit;}
+
+  /* SHELL */
+  .shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh;}
+  .side{position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;border-right:1px solid var(--paper-line);padding:44px 28px 28px 36px;display:flex;flex-direction:column;}
+  .logo{display:inline-block;text-decoration:none;color:var(--ink);font-family:'Oswald',sans-serif;font-weight:700;line-height:0.92;align-self:flex-start;}
+  .logo-top{display:flex;align-items:stretch;font-size:40px;}
+  .logo .zero{border:2.5px solid var(--ink);background:var(--paper);padding:8px 10px;display:flex;align-items:center;}
+  .logo .fluff{background:var(--ink);color:var(--paper);padding:8px 10px;display:flex;align-items:center;}
+  .logo-sub{display:block;font-weight:600;font-size:23px;letter-spacing:0.02em;margin-top:3px;margin-left:12.5px;}
+  .side-nav{margin-top:40px;display:flex;flex-direction:column;gap:2px;border-top:2px solid var(--ink);padding-top:14px;}
+  .side-nav a,.side-foot a{font-family:'Oswald',sans-serif;font-weight:500;text-decoration:none;border-bottom:1px solid transparent;}
+  .side-nav a{font-size:18px;padding:6px 0;align-self:flex-start;}
+  .side-nav a:hover,.side-foot a:hover{border-bottom-color:var(--ink);}
+  .side-foot{margin-top:auto;padding-top:28px;border-top:1px solid var(--paper-line);font-family:'Oswald',sans-serif;font-size:12px;color:var(--muted);}
+  .side-foot a{font-size:15px;color:var(--ink);display:inline-block;margin-bottom:10px;}
+  .main{padding:0 clamp(28px,3.5vw,64px);min-width:0;}
+  .main-inner{max-width:1360px;}
+  .main-foot{border-top:1px solid var(--paper-line);padding:26px 0 40px;font-family:'Oswald',sans-serif;font-size:12px;color:var(--muted);display:none;}
+
+  /* OPENING */
+  .opening{padding:52px 0 40px;}
+  .opening h1{font-weight:700;font-size:clamp(34px,3.7vw,60px);line-height:1.04;letter-spacing:0;max-width:20ch;}
+  .opening .lede{font-style:italic;font-size:clamp(18px,1.35vw,21px);color:var(--muted);margin:14px 0 0;}
+  .facts{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 0;font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;}
+  .facts li{display:flex;align-items:center;}
+  .facts li + li::before{content:"·";margin:0 14px;color:var(--muted);font-weight:700;}
+
+  /* SECTION HEADINGS */
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin:0 0 28px;}
+  .sec-head h2{font-weight:600;font-size:clamp(30px,2.6vw,40px);line-height:1.1;}
+  .count{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+
+  /* BOOK CARDS */
+  .book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;}
+  .book-row{container-type:inline-size;position:relative;background:var(--card);border:1px solid var(--paper-line);}
+  .book-main{display:flex;flex-direction:column;align-items:stretch;gap:18px;padding:24px 24px 24px 29px;height:100%;}
+  .book-cover-wrap{display:flex;justify-content:center;}
+  .niche-tab{position:absolute;left:0;top:0;bottom:0;width:5px;}
+  .niche-tab.finance{background:var(--finance);} .niche-tab.diy{background:var(--diy);} .niche-tab.productivity{background:var(--productivity);} .niche-tab.womens-health{background:var(--womens-health);}
+  .niche-tab.debt-snowball{background:#00EF00;} .niche-tab.task-batching{background:#38B6FF;} .niche-tab.strength-training{background:#FE66C3;} .niche-tab.home-winter-proofing{background:#FF6600;}
+  .book-cover{width:160px;height:auto;display:block;box-shadow:0 1px 4px rgba(0,0,0,0.18);}
+  .book-body{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .book-meta{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.03em;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-bottom:6px;}
+  .niche-name.finance{color:var(--finance);} .niche-name.diy{color:var(--diy);} .niche-name.productivity{color:var(--productivity);} .niche-name.womens-health{color:var(--womens-health);}
+  .pen-name{color:var(--muted);font-weight:500;}
+  .book-title{font-family:'Oswald',sans-serif;font-weight:600;font-size:24px;line-height:1.2;margin-bottom:8px;}
+  .book-sub{font-family:'Oswald',sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin:-4px 0 10px;}
+  .book-hook{font-size:16px;color:#2A2A26;max-width:62ch;}
+  .book-actions{margin-top:auto;padding-top:14px;}
+  .badge{display:inline-block;font-family:'Oswald',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;
+         color:var(--ink);background:#E7E5DC;border:1px solid #CBC8BC;border-radius:999px;padding:4px 11px 3px;line-height:1.3;}
+  /* wide card: cover to the left of the text (as /layout-test) */
+  @container (min-width: 600px){
+    .book-main{flex-direction:row;gap:24px;}
+    .book-cover-wrap{display:block;flex-shrink:0;}
+    .book-cover{width:150px;}
+  }
+  .more-note{font-style:italic;color:var(--muted);font-size:15px;margin:24px 0 0;}
+
+  /* THE POINT */
+  .about{padding:64px 0 60px;min-height:100vh;min-height:100lvh;}
+  .about-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px 56px;}
+  .about p{max-width:62ch;font-size:17px;color:#2A2A26;margin:0;}
+  .about-facts{list-style:none;margin:0;padding:0;font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;}
+  .about-facts li{padding:10px 0;border-bottom:1px solid var(--paper-line);}
+  .about-facts li:first-child{border-top:1px solid var(--paper-line);}
+  @media (min-width: 1100px){ .about-grid{grid-template-columns:minmax(0,62ch) minmax(220px,320px);} }
+
+  /* PHONES / SMALL TABLETS */
+  @media (max-width: 899px){
+    .shell{display:block;}
+    .side{position:sticky;top:0;z-index:5;height:auto;overflow:visible;border-right:0;border-bottom:1px solid var(--paper-line);background:var(--paper);
+          padding:12px 16px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-top{font-size:15px;} .logo .zero{border-width:1.5px;padding:5px 7px;} .logo .fluff{padding:5px 7px;}
+    .logo-sub{font-size:12px;letter-spacing:0.06em;margin-top:2px;margin-left:8.5px;}
+    .side-nav{margin:0;padding:0;border:0;flex-direction:row;gap:16px;} .side-nav a{font-size:14px;padding:2px 0;}
+    .side-foot{display:none;}
+    .main{padding:0 16px;}
+    .opening{padding:30px 0 30px;}
+    .book-grid{grid-template-columns:minmax(0,1fr);gap:20px;}
+    .main-foot{display:block;}
+    .about{padding-top:48px;min-height:calc(100vh - 140px);min-height:calc(100lvh - 140px);}
+    [id]{scroll-margin-top:64px;}
+  }
+  @media (min-width: 900px){ .side-nav .nav-privacy{display:none;} }
+  @media (max-width: 520px){ .book-main{padding:20px 18px 20px 23px;} .book-title{font-size:22px;} .facts{flex-direction:column;gap:6px;font-size:12px;} .facts li + li::before{content:none;} }
+  @media (max-width: 360px){ .side-nav{gap:12px;} .side-nav a{font-size:13px;} }
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+  <a class="logo" href="/layout-test-2" aria-label="Zero Fluff Guides home">
+    <span class="logo-top"><span class="zero">ZERO</span><span class="fluff">FLUFF</span></span>
+    <span class="logo-sub">GUIDES</span>
+  </a>
+  <nav class="side-nav" aria-label="Site">
+    <a href="#books">Books</a>
+    <a href="#about">The Point</a>
+    <a class="nav-privacy" href="/privacy">Privacy</a>
+  </nav>
+  <div class="side-foot"><a href="/privacy">Privacy</a><br>© 2026 Comwares Inc. — Zero Fluff Guides</div>
+</aside>
+<main class="main">
+  <div class="main-inner">
+    <section class="opening">
+      <h1>Straight answers, real numbers, no padding.</h1>
+      <p class="lede">Pick a problem, get the exact steps to fix it.</p>
+      <ul class="facts"><li>Around 60 pages</li><li>Read it in one evening</li><li>One action step per chapter</li></ul>
+    </section>
+    <section class="books" id="books">
+      <div class="sec-head"><h2>The Library</h2><span class="count">4 books</span></div>
+      <div class="book-grid">
+    <div class="book-row">
+      <div class="book-main">
+      <div class="book-cover-wrap">
+        <div class="niche-tab diy home-winter-proofing"></div>
+        <img class="book-cover" src="/assets/covers/home-winter-proofing.jpg?v=3" width="600" height="960" alt="Home Winter Proofing by Rick Donnelly cover">
+      </div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name diy">DIY</span>
+          <span class="pen-name">Rick Donnelly</span>
+        </div>
+        <div class="book-title">Home Winter Proofing</div>
+        <div class="book-sub">Seal Drafts, Stop Cold Spots &amp; Lower Your Heating Bill</div>
+        <div class="book-hook">If you have drafty windows, cold rooms and a heating bill that keeps climbing, this 65-page guide gives you a plain plan to find the leaks and seal them, with one action step at the end of each of its 10 chapters. A free worksheet saves only on your own device, needs no sign-up, and calculates how much you saved this season and how many seasons the work takes to pay for itself.</div>
+        <div class="book-actions">
+          <span class="book-soon badge">Coming soon</span>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="book-row">
+      <div class="book-main">
+      <div class="book-cover-wrap">
+        <div class="niche-tab finance debt-snowball"></div>
+        <img class="book-cover" src="/assets/covers/debt-snowball.jpg?v=5" width="600" height="960" alt="Debt Snowball Method by Dan Orwin cover">
+      </div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name finance">Personal Finance</span>
+          <span class="pen-name">Dan Orwin</span>
+        </div>
+        <div class="book-title">Debt Snowball Method</div>
+        <div class="book-sub">Paying Off $30,000 in Debt in Under 3 Years</div>
+        <div class="book-hook">If you owe around $30,000 and pay the minimums, the balances barely move. This 60-page plan gives you a ranked payoff order, a budget that finds extra cash, and a month-by-month payment schedule, and you can read it in one evening. A free worksheet calculates your debt-free date and payoff order, and saves only on your own device.</div>
+        <div class="book-actions">
+          <span class="book-soon badge">Coming soon</span>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="book-row">
+      <div class="book-main">
+      <div class="book-cover-wrap">
+        <div class="niche-tab productivity task-batching"></div>
+        <img class="book-cover" src="/assets/covers/task-batching.jpg?v=3" width="600" height="960" alt="Task Batching by Cole Ashford cover">
+      </div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name productivity">Productivity</span>
+          <span class="pen-name">Cole Ashford</span>
+        </div>
+        <div class="book-title">Task Batching</div>
+        <div class="book-sub">Cutting Your Weekly To-Do List From 40 Tasks to 12</div>
+        <div class="book-hook">If your week is a long list of small tasks scattered across every day, you never get a clear run at anything. This short plan shows you how to group similar tasks into batches and give each one its own block of time, so your week runs on fewer, bigger pieces.</div>
+        <div class="book-actions">
+          <span class="book-soon badge">Coming soon</span>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="book-row">
+      <div class="book-main">
+      <div class="book-cover-wrap">
+        <div class="niche-tab womens-health strength-training"></div>
+        <img class="book-cover" src="/assets/covers/strength-training.jpg?v=3" width="600" height="960" alt="Strength Training by Kat Westcott cover">
+      </div>
+      <div class="book-body">
+        <div class="book-meta">
+          <span class="niche-name womens-health">Women&rsquo;s Health</span>
+          <span class="pen-name">Kat Westcott</span>
+        </div>
+        <div class="book-title">Strength Training</div>
+        <div class="book-sub">Your First 8 Weeks With Simple Home Workouts</div>
+        <div class="book-hook">You don&rsquo;t need a gym to get stronger. This short guide walks you through your first eight weeks of simple home workouts. It&rsquo;s written for beginners, with clear steps, so you can start where you are and build at your own pace.</div>
+        <div class="book-actions">
+          <span class="book-soon badge">Coming soon</span>
+        </div>
+      </div>
+      </div>
+    </div>
+      </div>
+      <p class="more-note">More Zero Fluff Guides on the way.</p>
+    </section>
+    <section class="about" id="about">
+      <div class="sec-head"><h2>The Point</h2></div>
+      <div class="about-grid">
+        <p>Zero Fluff Guides are short, direct books built around one problem and one working plan to fix it. No filler chapters, no vague encouragement — real numbers, real steps, and free tools that do the math for you.</p>
+        <ul class="about-facts"><li>Around 60 pages</li><li>Read it in one evening</li><li>One action step per chapter</li></ul>
+      </div>
+    </section>
+  </div>
+  <footer class="main-foot">© 2026 Comwares Inc. — Zero Fluff Guides &nbsp;·&nbsp; <a href="/privacy">Privacy</a></footer>
+</main>
+</div>
+</body>
+</html>
