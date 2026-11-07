@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <title>Zero Fluff Guides</title>
@@ -19,274 +18,150 @@
 <meta name="twitter:title" content="Zero Fluff Guides">
 <meta name="twitter:description" content="Short, direct books built around one problem and one working plan to fix it. Real numbers, real steps, and free tools that do the math for you.">
 <meta name="twitter:image" content="https://zerofluffguides.com/assets/share/zero-fluff-guides-share.jpg?v=4">
+<meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#141414;
-    --paper:#F3F3EF;
-    --paper-line:#D8D6CC;
-    --finance:#21694A;
-    --diy:#C1571B;
-    --productivity:#2A4B7C;
-    --womens-health:#B0287A;
-    --muted:#5B5A54;
+    --ink:#141414; --paper:#F3F3EF; --paper-line:#D8D6CC;
+    --finance:#21694A; --diy:#C1571B; --productivity:#2A4B7C; --womens-health:#B0287A; --muted:#5B5A54;
+    --side:300px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   html{background:var(--paper);}
-  @media (prefers-reduced-motion: no-preference){
-    html{scroll-behavior:smooth;}
-  }
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Lora', Georgia, serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-color-scheme: dark){
-    html,body{background:var(--paper) !important;color:var(--ink) !important;}
-  }
-  h1,h2,h3,.head{
-    font-family:'Oswald', 'Arial Narrow', sans-serif;
-    text-transform:none;
-    letter-spacing:0.01em;
-    margin:0;
-  }
+  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth;} }
+  body{background:var(--paper);color:var(--ink);font-family:'Lora', Georgia, serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  @media (prefers-color-scheme: dark){ html,body{background:var(--paper) !important;color:var(--ink) !important;} }
+  h1,h2,h3{font-family:'Oswald','Arial Narrow',sans-serif;letter-spacing:0.01em;margin:0;}
   a{color:inherit;}
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
 
-  /* NAV */
-  nav{
-    border-bottom:1px solid var(--paper-line);
-    padding:18px 0;
-  }
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;}
-  .nav-mark{
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:14px;
-    letter-spacing:0.02em;
-    line-height:1.05;
-  }
-  .nav-mark .nav-top{display:flex;align-items:stretch;}
-  .nav-mark .nav-zero{
-    border:1.5px solid var(--ink);
-    background:var(--paper);
-    padding:5px 7px;
-    display:flex;
-    align-items:center;
-  }
-  .nav-mark .nav-fluff{
-    background:var(--ink);
-    color:var(--paper);
-    padding:5px 7px;
-    display:flex;
-    align-items:center;
-  }
-  .nav-mark .nav-guides{
-    display:block;
-    font-size:12px;
-    letter-spacing:0.06em;
-    margin-top:2px;
-    margin-left:8.5px;
-  }
-  .nav-links{display:flex;gap:22px;font-size:14px;font-family:'Oswald',sans-serif;font-weight:500;}
-  .nav-links a{text-decoration:none;border-bottom:1px solid transparent;}
-  .nav-links a:hover{border-bottom:1px solid var(--ink);}
+  /* ---------- SHELL: sidebar + main ---------- */
+  .shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh;}
+  .side{position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;border-right:1px solid var(--paper-line);
+        padding:44px 34px 28px 34px;display:flex;flex-direction:column;}
+  .logo{display:block;text-decoration:none;color:var(--ink);font-family:'Oswald',sans-serif;font-weight:700;line-height:0.92;align-self:stretch;}
+  .logo-top{display:flex;align-items:stretch;font-size:42px;}
+  .logo .zero{border:2.5px solid var(--ink);background:var(--paper);padding:9px 0;display:flex;align-items:center;justify-content:center;flex:1 1 auto;}
+  .logo .fluff{background:var(--ink);color:var(--paper);padding:9px 0;display:flex;align-items:center;justify-content:center;flex:1 1 auto;}
+  .logo-sub{display:block;font-weight:600;font-size:24px;letter-spacing:0.02em;margin-top:3px;margin-left:13.5px;}
+  .tagline{font-style:italic;font-size:17px;color:var(--muted);margin:22px 0 0;}
+  .side-nav{margin-top:40px;display:flex;flex-direction:column;gap:2px;border-top:2px solid var(--ink);padding-top:14px;}
+  .side-nav a,.side-foot a{font-family:'Oswald',sans-serif;font-weight:500;text-decoration:none;}
+  .side-nav a{font-size:18px;padding:6px 0;border-bottom:1px solid transparent;align-self:flex-start;}
+  .side-nav a:hover,.side-foot a:hover{border-bottom-color:var(--ink);}
+  .side-foot{margin-top:auto;padding-top:28px;border-top:1px solid var(--paper-line);font-family:'Oswald',sans-serif;font-size:12px;color:var(--muted);letter-spacing:0.01em;}
+  .side-foot a{font-size:15px;color:var(--ink);border-bottom:1px solid transparent;display:inline-block;margin-bottom:10px;}
 
-  /* HERO */
-  .hero{padding:72px 0 24px;}
-  .wordmark{
-    font-family:'Oswald',sans-serif;
-    font-weight:700;
-    font-size:clamp(48px,10vw,84px);
-    line-height:0.92;
-    display:inline-block;
-  }
-  .wordmark-top{display:flex;align-items:stretch;}
-  .wordmark .zero{color:var(--ink);border:3px solid var(--ink);background:var(--paper);padding:16px 18px;display:flex;align-items:center;}
-  .wordmark .fluff{background:var(--ink);color:var(--paper);padding:16px 18px;display:flex;align-items:center;}
-  .wordmark-sub{
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:clamp(28px,6vw,44px);
-    display:block;
-    margin-top:2px;
-    margin-left:21px;
-  }
-  .tagline{
-    font-family:'Lora',serif;
-    font-style:italic;
-    font-size:19px;
-    color:var(--muted);
-    max-width:38ch;
-    margin-top:22px;
-  }
+  .main{padding:56px clamp(24px,2vw,48px) 0;min-width:0;}
+  .main-inner{max-width:1600px;}
+  .top-tagline{display:none;}
+  .section-label{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.03em;color:var(--muted);padding-bottom:10px;border-bottom:2px solid var(--ink);margin:0;}
+  .main-foot{border-top:1px solid var(--paper-line);padding:26px 0 40px;font-family:'Oswald',sans-serif;font-size:12px;color:var(--muted);letter-spacing:0.01em;display:none;}
 
-  /* SECTION LABEL */
-  .section-label{
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:13px;
-    letter-spacing:0.03em;
-    color:var(--muted);
-    padding-bottom:10px;
-    border-bottom:2px solid var(--ink);
-    margin-bottom:0;
-  }
-
-  /* BOOK LIST */
-  .books{padding:28px 0 20px;}
-  .book-row{
-    display:flex;
-    gap:18px;
-    padding:26px 0;
-    border-bottom:1px solid var(--paper-line);
-    align-items:flex-start;
-  }
-  .book-row:first-of-type{padding-top:28px;}
-  /* strip + cover share one box, so the strip is always exactly the cover's height */
+  /* library heading: bigger, bold, title font */
+  .sec-head{border-bottom:2px solid var(--ink);padding-bottom:10px;}
+  .sec-head h2{font-weight:700;font-size:clamp(30px,2.6vw,40px);line-height:1.1;}
+  /* ---------- BOOKS ---------- */
+  .book-grid{display:grid;grid-template-columns:minmax(0,1fr);column-gap:40px;}
+  .book-row{padding:30px 0;border-bottom:1px solid var(--paper-line);container-type:inline-size;}
   .book-cover-wrap{display:flex;gap:18px;flex-shrink:0;}
-  .niche-tab{
-    width:5px;
-    align-self:stretch;
-    flex-shrink:0;
-  }
-  .niche-tab.finance{background:var(--finance);}
-  .niche-tab.diy{background:var(--diy);}
-  .niche-tab.productivity{background:var(--productivity);}
-  .niche-tab.womens-health{background:var(--womens-health);}
-  .niche-tab.debt-snowball{background:#00EF00;}   /* the cover's green; niche text keeps the darker --finance */
-  .niche-tab.task-batching{background:#38B6FF;}   /* cover colours; niche text keeps the darker niche colour */
-  .niche-tab.strength-training{background:#FE66C3;}
-  .niche-tab.home-winter-proofing{background:#FF6600;}
-  .book-main{flex:1;min-width:0;display:flex;gap:22px;align-items:flex-start;}
-  .book-cover{width:150px;height:auto;flex-shrink:0;display:block;align-self:flex-start;box-shadow:0 1px 4px rgba(0,0,0,0.18);}
+  .niche-tab{width:5px;align-self:stretch;flex-shrink:0;}
+  .niche-tab.finance{background:var(--finance);} .niche-tab.diy{background:var(--diy);}
+  .niche-tab.productivity{background:var(--productivity);} .niche-tab.womens-health{background:var(--womens-health);}
+  .niche-tab.debt-snowball{background:#00EF00;} .niche-tab.task-batching{background:#38B6FF;}
+  .niche-tab.strength-training{background:#FE66C3;} .niche-tab.home-winter-proofing{background:#FF6600;}
+  .book-main{display:flex;gap:24px;align-items:flex-start;}
+  .book-cover{width:170px;height:auto;flex-shrink:0;display:block;align-self:flex-start;box-shadow:0 1px 4px rgba(0,0,0,0.18);}
   .book-body{flex:1;min-width:0;}
-  .book-meta{
-    font-family:'Oswald',sans-serif;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:0.03em;
-    display:flex;
-    gap:14px;
-    align-items:center;
-    margin-bottom:6px;
-  }
-  .niche-name.finance{color:var(--finance);}
-  .niche-name.diy{color:var(--diy);}
-  .niche-name.productivity{color:var(--productivity);}
-  .niche-name.womens-health{color:var(--womens-health);}
+  .book-meta{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.03em;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-bottom:6px;}
+  .niche-name.finance{color:var(--finance);} .niche-name.diy{color:var(--diy);}
+  .niche-name.productivity{color:var(--productivity);} .niche-name.womens-health{color:var(--womens-health);}
   .pen-name{color:var(--muted);font-weight:500;}
-  .book-title{
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:22px;
-    margin-bottom:8px;
+  .book-title{font-family:'Oswald',sans-serif;font-weight:600;font-size:24px;margin-bottom:8px;line-height:1.2;}
+  .book-sub{font-family:'Oswald',sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin:-4px 0 10px;}
+  .book-hook{font-size:16px;color:#2A2A26;max-width:62ch;}
+  .book-actions{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;margin-top:12px;}
+  .book-soon{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;color:#8C8A82;letter-spacing:0.03em;text-transform:uppercase;}
+  .more-note{font-style:italic;color:var(--muted);font-size:15px;margin:22px 0 0;}
+  /* desktop (1200px and wider): always two books per row, cover beside the text; the cover shrinks a little
+     on narrower desktops (down to 96px) so the text keeps a readable width */
+  @media (min-width: 1200px){
+    .book-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,2vw,40px);}
+    .book-cover-wrap{gap:14px;}
+    .book-main{gap:18px;}
+    /* 150px wherever the card is wide enough (1440px screens and up); smaller only when the text beside it would drop under ~40 characters */
+    .book-cover{width:clamp(96px,min(29cqi,calc(100cqi - 340px)),150px);}
   }
-  .book-hook{
-    font-size:16px;
-    color:#2A2A26;
-    max-width:56ch;
-  }
-  .book-cta{
-    display:inline-block;
-    margin-top:10px;
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:13px;
-    text-decoration:none;
-    border-bottom:1px solid var(--ink);
-    padding-bottom:1px;
-  }
-  .book-sub{
-    font-family:'Oswald',sans-serif;
-    font-weight:500;
-    font-size:15px;
-    color:var(--muted);
-    margin:-4px 0 10px;
-  }
-  .book-actions{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:baseline;
-    gap:8px 22px;
-    margin-top:10px;
-  }
-  .book-actions .book-cta{margin-top:0;}
-  .book-soon{
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:13px;
-    color:#8C8A82;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-  }
-  .more-note{
-    font-style:italic;
-    color:var(--muted);
-    font-size:15px;
-    margin:22px 0 0;
-  }
+  @media (min-width: 1800px){ .book-cover{width:clamp(96px,min(29cqi,calc(100cqi - 340px)),170px);} }
 
-  /* ABOUT */
-  .about{padding:20px 0 60px;min-height:calc(100vh - 86px);min-height:calc(100lvh - 86px);} /* room below so "The Point" can scroll this heading to the top; 86px = footer height */
-  .about p{max-width:60ch;font-size:16px;color:#2A2A26;}
+  /* ---------- THE POINT ---------- */
+  .about{padding:56px 0 60px;min-height:100vh;min-height:100lvh;} /* room below so "The Point" can scroll its heading to the top */
+  .about p{max-width:62ch;font-size:16px;color:#2A2A26;margin-top:20px;}
 
-  footer{
-    border-top:1px solid var(--paper-line);
-    padding:26px 0 40px;
-    font-family:'Oswald',sans-serif;
-    font-size:12px;
-    color:var(--muted);
-    letter-spacing:0.01em;
+  /* ---------- PRIVACY ---------- */
+  .page h1{font-weight:700;font-size:clamp(34px,5vw,48px);line-height:1;}
+  .updated{font-style:italic;color:var(--muted);margin-top:12px;font-size:16px;}
+  .page .section-label{margin-top:40px;}
+  .page p{max-width:65ch;font-size:16px;color:#2A2A26;margin:16px 0 0;}
+  .page{padding-bottom:56px;max-width:780px;}
+
+  /* ---------- PHONES + SMALL TABLETS: top bar ---------- */
+  @media (max-width: 899px){
+    .shell{display:block;}
+    .side{position:sticky;top:0;z-index:5;height:auto;overflow:visible;border-right:0;border-bottom:1px solid var(--paper-line);
+          background:var(--paper);padding:12px 16px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-top{font-size:15px;}
+    .logo{display:inline-block;align-self:center;flex-shrink:0;}
+    .logo .zero{border-width:1.5px;padding:5px 7px;flex:none;}
+    .logo .fluff{padding:5px 7px;flex:none;}
+    .logo-sub{font-size:12px;letter-spacing:0.06em;margin-top:2px;margin-left:8.5px;}
+    .side .tagline{display:none;}
+    .side-nav{margin:0;padding:0;border:0;flex-direction:row;gap:16px;}
+    .side-nav a{font-size:14px;padding:2px 0;}
+    .side-foot{display:none;}
+    .side-nav .nav-privacy{display:inline-block;}
+    .main{padding:28px 16px 0;}
+    .top-tagline{display:block;font-style:italic;font-size:17px;color:var(--muted);margin:0 0 26px;max-width:38ch;}
+    .main-foot{display:block;}
+    .about{min-height:calc(100vh - 140px);min-height:calc(100lvh - 140px);}
+    [id]{scroll-margin-top:64px;}
   }
-
-  @media (max-width:520px){
-    .book-meta{flex-wrap:wrap;row-gap:4px;}
-    .book-main{flex-direction:column;gap:16px;}
-    .book-cover{width:140px;}
-    /* stacked layout: strip runs the full height of the entry (cover top to the Coming soon / worksheet line) */
-    .book-main{position:relative;padding-left:23px;}   /* 5px strip + 18px gap, keeps cover and text where they were */
+  @media (min-width: 900px){ .side-nav .nav-privacy{display:none;} }
+  @media (max-width: 520px){
+    .book-main{flex-direction:column;gap:16px;position:relative;padding-left:23px;}
     .niche-tab{position:absolute;left:0;top:0;bottom:0;}
-    .hero{padding-bottom:16px;}
-    .books{padding-top:20px;}
+    .book-cover{width:140px;}
+    .book-title{font-size:22px;}
   }
+  @media (max-width: 360px){ .side-nav{gap:12px;} .side-nav a{font-size:13px;} }
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="wrap">
-    <div class="nav-mark">
-      <span class="nav-top"><span class="nav-zero">ZERO</span><span class="nav-fluff">FLUFF</span></span>
-      <span class="nav-guides">GUIDES</span>
-    </div>
-    <div class="nav-links">
-      <a href="#books">Books</a>
-      <a href="#about">The Point</a>
-    </div>
+<div class="shell">
+<aside class="side">
+  <a class="logo" href="/" aria-label="Zero Fluff Guides home">
+    <span class="logo-top"><span class="zero">ZERO</span><span class="fluff">FLUFF</span></span>
+    <span class="logo-sub">GUIDES</span>
+  </a>
+  <p class="tagline">Straight answers, real numbers, no padding. Pick a problem, get the exact steps to fix it.</p>
+  <nav class="side-nav" aria-label="Site">
+    <a href="#books">The Library</a>
+    <a href="#about">The Point</a>
+    <a class="nav-privacy" href="/privacy">Privacy</a>
+  </nav>
+  <div class="side-foot">
+    <a href="/privacy">Privacy</a><br>
+    © 2026 Comwares Inc. — Zero Fluff Guides
   </div>
-</nav>
-
-<header class="hero">
-  <div class="wrap">
-    <div class="wordmark">
-      <span class="wordmark-top"><span class="zero">ZERO</span><span class="fluff">FLUFF</span></span>
-      <span class="wordmark-sub">GUIDES</span>
-    </div>
-    <p class="tagline">Straight answers, real numbers, no padding. Pick a problem, get the exact steps to fix it.</p>
-  </div>
-</header>
-
-<section class="books" id="books">
-  <div class="wrap">
-    <div class="section-label">THE LIBRARY</div>
-
-    <!-- Book entry: copy this whole .book-row. The strip sits inside .book-cover-wrap so it always matches the cover's height; its colour comes from the niche class (finance / diy / productivity). -->
+</aside>
+<main class="main">
+  <div class="main-inner">
+    <p class="top-tagline">Straight answers, real numbers, no padding. Pick a problem, get the exact steps to fix it.</p>
+    <section class="books" id="books">
+      <div class="sec-head"><h2>The Library</h2></div>
+      <div class="book-grid">
     <div class="book-row">
       <div class="book-main">
       <div class="book-cover-wrap">
@@ -307,7 +182,6 @@
       </div>
       </div>
     </div>
-
     <div class="book-row">
       <div class="book-main">
       <div class="book-cover-wrap">
@@ -328,7 +202,6 @@
       </div>
       </div>
     </div>
-
     <div class="book-row">
       <div class="book-main">
       <div class="book-cover-wrap">
@@ -349,7 +222,6 @@
       </div>
       </div>
     </div>
-
     <div class="book-row">
       <div class="book-main">
       <div class="book-cover-wrap">
@@ -370,21 +242,16 @@
       </div>
       </div>
     </div>
-
-    <p class="more-note">More Zero Fluff Guides on the way.</p>
+      </div>
+      <p class="more-note">More Zero Fluff Guides on the way.</p>
+    </section>
+    <section class="about" id="about">
+      <div class="sec-head"><h2>The Point</h2></div>
+      <p>Zero Fluff Guides are short, direct books built around one problem and one working plan to fix it. No filler chapters, no vague encouragement — real numbers, real steps, and free tools that do the math for you.</p>
+    </section>
   </div>
-</section>
-
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="section-label">THE POINT</div>
-    <p style="margin-top:20px;">Zero Fluff Guides are short, direct books built around one problem and one working plan to fix it. No filler chapters, no vague encouragement — real numbers, real steps, and free tools that do the math for you.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">© 2026 Comwares Inc. — Zero Fluff Guides &nbsp;·&nbsp; <a href="/privacy">Privacy</a></div>
-</footer>
-
+  <footer class="main-foot">© 2026 Comwares Inc. — Zero Fluff Guides &nbsp;·&nbsp; <a href="/privacy">Privacy</a></footer>
+</main>
+</div>
 </body>
 </html>
