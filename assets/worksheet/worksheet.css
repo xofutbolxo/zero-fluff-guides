@@ -30,11 +30,11 @@ a{color:inherit;}
 /* NAV (same as the rest of the site) */
 nav{border-bottom:1px solid var(--paper-line);padding:16px 0;}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;}
-.nav-mark{font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.02em;line-height:1.05;text-decoration:none;color:var(--ink);}
+.nav-mark{font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:0.02em;line-height:1.05;text-decoration:none;color:var(--ink);}
 .nav-mark .nav-top{display:flex;align-items:stretch;}
-.nav-mark .nav-zero{border:1.5px solid var(--ink);background:var(--paper);padding:5px 7px;display:flex;align-items:center;}
+.nav-mark .nav-zero{border:1.5px solid var(--ink);background:var(--paper);padding:5px 7px;display:flex;align-items:center;font-weight:800;}
 .nav-mark .nav-fluff{background:var(--ink);color:var(--paper);padding:5px 7px;display:flex;align-items:center;}
-.nav-mark .nav-guides{display:block;font-size:12px;letter-spacing:0.06em;margin-top:2px;margin-left:8.5px;}
+.nav-mark .nav-guides{display:block;font-size:9.5px;letter-spacing:0.06em;margin-top:3px;margin-left:8px;}
 .nav-links{display:flex;gap:18px;font-size:14px;font-family:'Oswald',sans-serif;font-weight:500;}
 .nav-links a{text-decoration:none;border-bottom:1px solid transparent;}
 .nav-links a:hover{border-bottom:1px solid var(--ink);}
