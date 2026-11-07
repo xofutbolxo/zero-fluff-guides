@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Privacy Policy — Zero Fluff Guides</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414; --paper:#F3F3EF; --paper-line:#D8D6CC;
+    --finance:#21694A; --diy:#C1571B; --productivity:#2A4B7C; --womens-health:#B0287A; --muted:#5B5A54;
+    --side:300px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{background:var(--paper);}
+  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth;} }
+  body{background:var(--paper);color:var(--ink);font-family:'Lora', Georgia, serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  @media (prefers-color-scheme: dark){ html,body{background:var(--paper) !important;color:var(--ink) !important;} }
+  h1,h2,h3{font-family:'Oswald','Arial Narrow',sans-serif;letter-spacing:0.01em;margin:0;}
+  a{color:inherit;}
+
+  /* ---------- SHELL: sidebar + main ---------- */
+  .shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh;}
+  .side{position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;border-right:1px solid var(--paper-line);
+        padding:44px 32px 28px 40px;display:flex;flex-direction:column;}
+  .logo{display:inline-block;text-decoration:none;color:var(--ink);font-family:'Oswald',sans-serif;font-weight:700;line-height:0.92;align-self:flex-start;}
+  .logo-top{display:flex;align-items:stretch;font-size:42px;}
+  .logo .zero{border:2.5px solid var(--ink);background:var(--paper);padding:9px 11px;display:flex;align-items:center;}
+  .logo .fluff{background:var(--ink);color:var(--paper);padding:9px 11px;display:flex;align-items:center;}
+  .logo-sub{display:block;font-weight:600;font-size:24px;letter-spacing:0.02em;margin-top:3px;margin-left:13.5px;}
+  .tagline{font-style:italic;font-size:17px;color:var(--muted);margin:22px 0 0;max-width:24ch;}
+  .side-nav{margin-top:40px;display:flex;flex-direction:column;gap:2px;border-top:2px solid var(--ink);padding-top:14px;}
+  .side-nav a,.side-foot a{font-family:'Oswald',sans-serif;font-weight:500;text-decoration:none;}
+  .side-nav a{font-size:18px;padding:6px 0;border-bottom:1px solid transparent;align-self:flex-start;}
+  .side-nav a:hover,.side-foot a:hover{border-bottom-color:var(--ink);}
+  .side-foot{margin-top:auto;padding-top:28px;border-top:1px solid var(--paper-line);font-family:'Oswald',sans-serif;font-size:12px;color:var(--muted);letter-spacing:0.01em;}
+  .side-foot a{font-size:15px;color:var(--ink);border-bottom:1px solid transparent;display:inline-block;margin-bottom:10px;}
+
+  .main{padding:56px clamp(28px,4vw,72px) 0;min-width:0;}
+  .main-inner{max-width:1360px;}
+  .top-tagline{display:none;}
+  .section-label{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.03em;color:var(--muted);padding-bottom:10px;border-bottom:2px solid var(--ink);margin:0;}
+  .main-foot{border-top:1px solid var(--paper-line);padding:26px 0 40px;font-family:'Oswald',sans-serif;font-size:12px;color:var(--muted);letter-spacing:0.01em;display:none;}
+
+  /* ---------- BOOKS ---------- */
+  .books{container-type:inline-size;}
+  .book-grid{display:grid;grid-template-columns:minmax(0,1fr);column-gap:56px;}
+  .book-row{padding:30px 0;border-bottom:1px solid var(--paper-line);}
+  .book-cover-wrap{display:flex;gap:18px;flex-shrink:0;}
+  .niche-tab{width:5px;align-self:stretch;flex-shrink:0;}
+  .niche-tab.finance{background:var(--finance);} .niche-tab.diy{background:var(--diy);}
+  .niche-tab.productivity{background:var(--productivity);} .niche-tab.womens-health{background:var(--womens-health);}
+  .niche-tab.debt-snowball{background:#00EF00;} .niche-tab.task-batching{background:#38B6FF;}
+  .niche-tab.strength-training{background:#FE66C3;} .niche-tab.home-winter-proofing{background:#FF6600;}
+  .book-main{display:flex;gap:24px;align-items:flex-start;}
+  .book-cover{width:170px;height:auto;flex-shrink:0;display:block;align-self:flex-start;box-shadow:0 1px 4px rgba(0,0,0,0.18);}
+  .book-body{flex:1;min-width:0;}
+  .book-meta{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.03em;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-bottom:6px;}
+  .niche-name.finance{color:var(--finance);} .niche-name.diy{color:var(--diy);}
+  .niche-name.productivity{color:var(--productivity);} .niche-name.womens-health{color:var(--womens-health);}
+  .pen-name{color:var(--muted);font-weight:500;}
+  .book-title{font-family:'Oswald',sans-serif;font-weight:600;font-size:24px;margin-bottom:8px;line-height:1.2;}
+  .book-sub{font-family:'Oswald',sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin:-4px 0 10px;}
+  .book-hook{font-size:16px;color:#2A2A26;max-width:62ch;}
+  .book-actions{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;margin-top:12px;}
+  .book-soon{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;color:#8C8A82;letter-spacing:0.03em;text-transform:uppercase;}
+  .more-note{font-style:italic;color:var(--muted);font-size:15px;margin:22px 0 0;}
+  /* two books per row once the book area is wide enough for comfortable text beside each cover */
+  @container (min-width: 1120px){
+    .book-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .book-cover{width:150px;}
+  }
+
+  /* ---------- THE POINT ---------- */
+  .about{padding:56px 0 60px;min-height:100vh;min-height:100lvh;} /* room below so "The Point" can scroll its heading to the top */
+  .about p{max-width:62ch;font-size:16px;color:#2A2A26;margin-top:20px;}
+
+  /* ---------- PRIVACY ---------- */
+  .page h1{font-weight:700;font-size:clamp(34px,5vw,48px);line-height:1;}
+  .updated{font-style:italic;color:var(--muted);margin-top:12px;font-size:16px;}
+  .page .section-label{margin-top:40px;}
+  .page p{max-width:65ch;font-size:16px;color:#2A2A26;margin:16px 0 0;}
+  .page{padding-bottom:56px;max-width:780px;}
+
+  /* ---------- PHONES + SMALL TABLETS: top bar ---------- */
+  @media (max-width: 899px){
+    .shell{display:block;}
+    .side{position:sticky;top:0;z-index:5;height:auto;overflow:visible;border-right:0;border-bottom:1px solid var(--paper-line);
+          background:var(--paper);padding:12px 16px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-top{font-size:15px;}
+    .logo .zero{border-width:1.5px;padding:5px 7px;}
+    .logo .fluff{padding:5px 7px;}
+    .logo-sub{font-size:12px;letter-spacing:0.06em;margin-top:2px;margin-left:8.5px;}
+    .side .tagline{display:none;}
+    .side-nav{margin:0;padding:0;border:0;flex-direction:row;gap:16px;}
+    .side-nav a{font-size:14px;padding:2px 0;}
+    .side-foot{display:none;}
+    .side-nav .nav-privacy{display:inline-block;}
+    .main{padding:28px 16px 0;}
+    .top-tagline{display:block;font-style:italic;font-size:17px;color:var(--muted);margin:0 0 26px;max-width:38ch;}
+    .main-foot{display:block;}
+    .about{min-height:calc(100vh - 140px);min-height:calc(100lvh - 140px);}
+    [id]{scroll-margin-top:64px;}
+  }
+  @media (min-width: 900px){ .side-nav .nav-privacy{display:none;} }
+  @media (max-width: 520px){
+    .book-main{flex-direction:column;gap:16px;position:relative;padding-left:23px;}
+    .niche-tab{position:absolute;left:0;top:0;bottom:0;}
+    .book-cover{width:140px;}
+    .book-title{font-size:22px;}
+  }
+  @media (max-width: 360px){ .side-nav{gap:12px;} .side-nav a{font-size:13px;} }
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+  <a class="logo" href="/layout-test" aria-label="Zero Fluff Guides home">
+    <span class="logo-top"><span class="zero">ZERO</span><span class="fluff">FLUFF</span></span>
+    <span class="logo-sub">GUIDES</span>
+  </a>
+  <p class="tagline">Straight answers, real numbers, no padding. Pick a problem, get the exact steps to fix it.</p>
+  <nav class="side-nav" aria-label="Site">
+    <a href="/layout-test#books">Books</a>
+    <a href="/layout-test#about">The Point</a>
+    <a class="nav-privacy" href="/layout-test-privacy">Privacy</a>
+  </nav>
+  <div class="side-foot">
+    <a href="/layout-test-privacy">Privacy</a><br>
+    © 2026 Comwares Inc. — Zero Fluff Guides
+  </div>
+</aside>
+<main class="main">
+  <div class="main-inner">
+    <div class="page">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: October 15, 2026</p>
+
+    <div class="section-label">THE SHORT VERSION</div>
+    <p>Zero Fluff Guides (zerofluffguides.com) is published by Comwares Inc. This site does not collect your personal data. There are no forms, no accounts, no cookies, no analytics, and no advertising or tracking code.</p>
+    <p><strong>Book worksheets.</strong> The free worksheets at zerofluffguides.com/tools save your answers in your own browser's storage on your device, so they are still there when you come back. They are never sent to us or to anyone else. You can delete them at any time with the "Clear all my answers" button, which sits with the other buttons at the top of each worksheet, or by clearing your browser's site data.</p>
+
+    <div class="section-label">SERVICES THE SITE USES</div>
+    <p><strong>Hosting.</strong> The site is hosted on GitHub Pages. Like any web host, GitHub may keep standard server logs, such as IP addresses, for security and to keep the service running. See GitHub's privacy statement for details.</p>
+    <p><strong>Fonts.</strong> The site's fonts load from Google Fonts, so your browser connects to Google's servers, which receive your IP address. We don't receive or use that information.</p>
+    <p><strong>Amazon.</strong> Book links take you to Amazon. Once you're there, Amazon's privacy policy applies.</p>
+
+    <div class="section-label">IF YOU EMAIL US</div>
+    <p>If you write to us, we use your email address and message only to reply. We don't add you to a mailing list, and we don't sell or share your details.</p>
+
+    <div class="section-label">CHANGES AND CONTACT</div>
+    <p>If this policy changes, we'll update this page and the date at the top.</p>
+    <p>Questions: <a href="mailto:hello@zerofluffguides.com">hello@zerofluffguides.com</a></p>
+  </div>
+  </div>
+  <footer class="main-foot">© 2026 Comwares Inc. — Zero Fluff Guides &nbsp;·&nbsp; <a href="/layout-test-privacy">Privacy</a></footer>
+</main>
+</div>
+</body>
+</html>
