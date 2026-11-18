@@ -193,4 +193,16 @@ footer .btn.link{font-size:12px;font-family:'Oswald',sans-serif;}
   #ws-print ol.p-order{margin:2pt 0 4pt;padding-left:16pt;}
   #ws-print .p-foot{margin-top:14pt;font-size:8.5pt;color:#444;}
   #ws-print .p-copy{margin-top:3pt;font-size:8.5pt;color:#444;}
+  /* paper layout (books with "printLayout": 2): label + its own write-in line on one row; never wider than the page */
+  #ws-print.paper{width:auto;max-width:100%;box-sizing:border-box;overflow-wrap:break-word;word-wrap:break-word;}
+  #ws-print.paper .p-sec{display:block;}
+  #ws-print.paper h2,#ws-print.paper .p-step{break-after:avoid;page-break-after:avoid;}
+  #ws-print.paper .p-row{display:flex;align-items:flex-end;min-height:24pt;margin:0;line-height:1.2;}
+  #ws-print.paper .p-lab{flex:0 0 40%;max-width:40%;color:#444;padding:0 8pt 2pt 0;box-sizing:border-box;}
+  #ws-print.paper .p-num{flex:0 0 18pt;padding:0 0 2pt;}
+  #ws-print.paper .p-line{flex:1 1 0;min-width:0;min-height:15pt;border-bottom:0.6pt solid #000;padding:0 0 2pt 2pt;}
+  #ws-print.paper .p-order{margin:2pt 0 4pt;}
+  #ws-print.paper table.p-table{table-layout:fixed;width:100%;}
+  #ws-print.paper table.p-table td{border-bottom:0.6pt solid #000;height:22pt;vertical-align:bottom;overflow-wrap:break-word;word-wrap:break-word;}
+  #ws-print.paper table.p-table tr{break-inside:avoid;page-break-inside:avoid;}
 }

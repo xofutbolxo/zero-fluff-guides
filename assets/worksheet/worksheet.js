@@ -459,7 +459,7 @@
     for (var k in f.showIf) if (f.showIf.hasOwnProperty(k) && state[k] !== f.showIf[k]) return false;
     return true;
   }
-  function answerRows(sec) {
+  function answerRows(sec, blank) {   // blank = paper print layout: empty answers print as empty write-in lines
     var rows = [];
     for (var i = 0; i < (sec.fields || []).length; i++) {
       var f = sec.fields[i], v = state[f.key], label = f.summary || f.label;
@@ -472,20 +472,21 @@
         case 'hybridPicks': var ps = snowballOrder(cleanDebts(state[debtKey()])).filter(function (d) { return v && v[d.id]; });
           rows.push([label || 'Moved to the top', ps.map(function (d) { return d.name; }).join(', ')]); break;
         case 'baseline': var ds2 = snowballOrder(cleanDebts(state[debtKey()]));
-          if (ds2.length) { var b = simulate(ds2, 0, false); rows.push(['Baseline payoff date', b.months ? monthLabel(addMonths(startMonth(), b.months - 1)) : 'Never, at these minimums']); } break;
+          if (ds2.length) { var b = simulate(ds2, 0, false); rows.push([blank ? 'Baseline payoff date (minimums only)' : 'Baseline payoff date', b.months ? monthLabel(addMonths(startMonth(), b.months - 1)) : 'Never, at these minimums']); }
+          else if (blank) rows.push(['Baseline payoff date (minimums only)', '']); break;
         case 'monthlyTotal': case 'note': case 'projection': case 'goalProgress': break;
         case 'money': rows.push([label, moneyIn(v)]); break;
         case 'percent': rows.push([label, pct(v)]); break;
-        case 'checkbox': rows.push([label, v ? 'Yes' : 'Not yet']); break;
+        case 'checkbox': rows.push([label, v ? 'Yes' : (blank ? '' : 'Not yet')]); break;
         case 'date': rows.push([label, dateLabel(v)]); break;
-        case 'monthYear': rows.push([label, v ? monthLabel(startMonth()) : 'Not set (using ' + monthLabel(THIS_MONTH) + ')']); break;
+        case 'monthYear': rows.push([label, v ? monthLabel(startMonth()) : (blank ? '' : 'Not set (using ' + monthLabel(THIS_MONTH) + ')')]); break;
         case 'dayOfMonth': rows.push([label, v === 'last' ? 'The last day of each month' : v ? 'The ' + ordinal(+v) + ' of each month' : '']); break;
         case 'choice': case 'select': var o = (f.options || []).filter(function (x) { return x.value === v; })[0]; rows.push([label, o ? o.label : '']); break;
         case 'debtSelect': var d3 = cleanDebts(state[debtKey()]).filter(function (x) { return x.id === v; })[0]; rows.push([label, d3 ? d3.name : '']); break;
         case 'list': for (var k = 0; k < (f.count || 0); k++) rows.push([(f.itemLabel || 'Item') + ' ' + (k + 1), (v || [])[k] || '']); break;
         default: rows.push([label, v ? String(v) : '']);
       }
-      if (f.type === 'goalProgress') { var sv = num(state[f.savedKey]); rows.push([f.summary || 'Saved so far', money(sv > 0 ? sv : 0) + ' of ' + money(f.goal)]); }
+      if (f.type === 'goalProgress') { var sv = num(state[f.savedKey]); rows.push([f.summary || 'Saved so far', blank && !(sv > 0) ? '' : money(sv > 0 ? sv : 0) + ' of ' + money(f.goal)]); }
     }
     return rows;
   }
@@ -581,6 +582,7 @@
   }
 
   function buildPrint() {
+    if (BOOK.printLayout === 2) return buildPaperPrint();
     var el = document.getElementById('ws-print'), p = plan();
     clear(el);
     el.appendChild(h('h1', { text: BOOK.title + ': Worksheets' }));
@@ -611,6 +613,67 @@
     }
     el.appendChild(h('div', { 'class': 'p-foot', text: 'zerofluffguides.com/tools/' + BOOK.slug + '. Your answers are stored only in your own browser.' }));
     el.appendChild(h('div', { 'class': 'p-copy', text: COPYRIGHT }));
+  }
+  /* Paper print layout (opt-in per book with "printLayout": 2): every answer gets its own ruled write-in line next to
+   * its label, empty tables/lists print blank ruled rows, and nothing is wider than the page. Print only. */
+  function pLine(label, value) {
+    return h('div', { 'class': 'p-row' }, [h('span', { 'class': 'p-lab', text: label }), h('span', { 'class': 'p-line', text: value || '' })]);
+  }
+  function blankRows(n) { return n ? 2 : 8; }
+  function buildPaperPrint() {
+    var el = document.getElementById('ws-print'), p = plan();
+    clear(el); el.className = 'paper';
+    el.appendChild(h('h1', { text: BOOK.title + ': Worksheets' }));
+    el.appendChild(h('div', { 'class': 'p-sub', text: (BOOK.subtitle ? BOOK.subtitle + '. ' : '') + 'By ' + BOOK.author + '.' }));
+    for (var i = 0; i < BOOK.sections.length; i++) {
+      var sec = BOOK.sections[i], div = h('div', { 'class': 'p-sec' }, [h('div', { 'class': 'p-label', text: sec.label }), h('h2', { text: sec.title }),
+        h('div', { 'class': 'p-step', text: 'Zero Fluff: ' + sec.step })]);
+      var isDebts = false, isSorted = false;
+      for (var j = 0; j < (sec.fields || []).length; j++) { if (sec.fields[j].type === 'debts') isDebts = true; if (sec.fields[j].type === 'debtsSorted') isSorted = sec.fields[j]; }
+      if (sec.id === BOOK.planSection) {
+        if (p.ok) {
+          var r = p.run;
+          div.appendChild(h('p', { text: 'Projected debt-free date: ' + (r.months ? monthLabel(addMonths(p.start, r.months - 1)) + ', ' + duration(r.months) + ' from ' + monthLabel(p.start) + ', paying ' + money(r.budget) + ' a month. Interest: about ' + money(r.interest) + '.' : 'not within 50 years.') }));
+          if (r.months) div.appendChild(paperTable(p.order, 0, function (d, q) { return r.cleared[q] ? monthLabel(addMonths(p.start, r.cleared[q] - 1)) : '-'; }, 'Paid off'));
+        } else {
+          div.appendChild(pLine('Projected debt-free date', ''));
+          div.appendChild(pLine('Payoff order', '')); div.appendChild(pLine('', ''));
+          div.appendChild(pLine('Monthly snowball amount', ''));
+        }
+      } else if (isDebts) {
+        var ds = cleanDebts(state[debtKey()]);
+        div.appendChild(paperTable(ds, blankRows(ds.length)));
+      } else if (isSorted && isSorted.order !== 'method') {
+        var sd = snowballOrder(cleanDebts(state[debtKey()])), ol = h('div', { 'class': 'p-order' }), n = sd.length + blankRows(sd.length);
+        for (var o = 0; o < n; o++) ol.appendChild(h('div', { 'class': 'p-row' }, [h('span', { 'class': 'p-num', text: (o + 1) + '.' }),
+          h('span', { 'class': 'p-line', text: o < sd.length ? sd[o].name + ' (' + money(sd[o].balance) + ')' : '' })]));
+        div.appendChild(ol);
+      }
+      if (sec.id !== BOOK.planSection) {
+        var rows = answerRows(sec, true);
+        for (var k = 0; k < rows.length; k++) {
+          if ((isDebts && rows[k][0] === 'Debts') || (isSorted && isSorted.order !== 'method' && rows[k][0] === (isSorted.summary || 'Order'))) continue;
+          div.appendChild(pLine(rows[k][0], rows[k][1]));
+          // An empty method-ordered payoff list (Ch 3) gets a second write-in line, like Plan at a Glance.
+          if (isSorted && isSorted.order === 'method' && rows[k][0] === (isSorted.summary || 'Order') && !rows[k][1]) div.appendChild(pLine('', ''));
+        }
+      }
+      el.appendChild(div);
+    }
+    el.appendChild(h('div', { 'class': 'p-foot', text: 'zerofluffguides.com/tools/' + BOOK.slug + '. Your answers are stored only in your own browser.' }));
+    el.appendChild(h('div', { 'class': 'p-copy', text: COPYRIGHT }));
+  }
+  function paperTable(ds, blanks, extraCol, extraHead) {
+    var cols = extraCol ? ['6%', '34%', '16%', '11%', '15%', '18%'] : ['7%', '43%', '18%', '13%', '19%'], cg = h('colgroup');
+    for (var c = 0; c < cols.length; c++) cg.appendChild(h('col', { style: 'width:' + cols[c] }));
+    var t = printTable(ds, extraCol, extraHead), tb = t.getElementsByTagName('tbody')[0];
+    for (var i = 0; i < blanks; i++) {
+      var tr = h('tr', { 'class': 'p-blank' }, [h('td', { text: String(ds.length + i + 1) }), h('td'), h('td', { 'class': 'n' }), h('td', { 'class': 'n' }), h('td', { 'class': 'n' })]);
+      if (extraCol) tr.appendChild(h('td', { 'class': 'n' }));
+      tb.appendChild(tr);
+    }
+    t.insertBefore(cg, t.firstChild); t.className = 'p-table';
+    return t;
   }
   function printTable(ds, extraCol, extraHead) {
     var head = h('tr', null, [h('th', { text: '#' }), h('th', { text: 'Debt' }), h('th', { 'class': 'n', text: 'Balance' }), h('th', { 'class': 'n', text: 'Rate' }), h('th', { 'class': 'n', text: 'Minimum' })]);
