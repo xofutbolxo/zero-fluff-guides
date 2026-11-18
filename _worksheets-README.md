@@ -33,7 +33,8 @@ A page's own script can add rows to the printout with `window.ZFGWorksheet.after
    nothing is cut off at the right margin and that no chapter is split across pages. Upload both PDFs to Drive
    KDP Claude Drafts/Final Reads/Print Tests (folder 1CxgvTaxm8mth9m6lN5nAowfzsGlovLWo) for the user to review.
 5. Publish only after the user approves the page and both PDFs. Remove the hidden test page in the same commit.
-6. After it is live: save the exact live page to Drive KDP Claude Drafts/Metadata as '<Book> worksheet page.html'
+6. After it is live: save the exact live page to Drive KDP Claude Drafts/Metadata/<Book>/ (the book's own folder) as
+   '<Book> worksheet page.html'
    (archive any older copy via zfg-archive-old-version), and upload the live empty + filled PDFs to Print Tests.
 
 ## Review link: zerofluffguides.com/review/<short-name>
