@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/worksheet/worksheet.css?v=5">
+<link rel="stylesheet" href="/assets/worksheet/worksheet.css?v=7">
 </head>
 <body>
 <!-- One small file per book: everything book-specific is in the JSON below. The shared template is /assets/worksheet/. -->
@@ -26,6 +26,8 @@
  "accent": "#A84A15",
  "accentSoft": "#FBEDE3",
  "planSection": "conclusion",
+ "printLayout": 2,
+ "printExtras": { "notes": true, "checkboxes": "box", "lists": "numbered" },
  "intro": "One section for each chapter. The links in the book jump straight to the matching section. Fill in what you have; your answers save on this device as you type.",
  "sections": [
   {
@@ -483,7 +485,7 @@
  ]
 }
 </script>
-<script src="/assets/worksheet/worksheet.js?v=4"></script>
+<script src="/assets/worksheet/worksheet.js?v=6"></script>
 <script>
 /* This page only (the shared template is unchanged): dates written as "Oct 15, 2026", and the Chapter 10
    savings and payback line. Plain ES5, like the template. */
@@ -558,6 +560,30 @@
   root.addEventListener('input', payback);
   new MutationObserver(function () { if (!document.getElementById('wp-payback')) refresh(); }).observe(root, { childList: true, subtree: true });
   refresh();
+
+  // Print view (paper layout): the same savings and payback figures as write-in lines under "This winter's usage",
+  // filled in when the screen shows them, blank otherwise. The template calls afterPrint each time it rebuilds the print view.
+  var printEl = document.getElementById('ws-print');
+  function printRow(label, value) {
+    var row = document.createElement('div'), lab = document.createElement('span'), val = document.createElement('span');
+    row.className = 'p-row'; lab.className = 'p-lab'; val.className = 'p-line';
+    lab.textContent = label; val.textContent = value;
+    row.appendChild(lab); row.appendChild(val);
+    return row;
+  }
+  function printPayback() {
+    if (!printEl || printEl.className !== 'paper' || document.getElementById('wp-payback-print')) return;
+    var labs = printEl.getElementsByTagName('span'), at = null;
+    for (var i = 0; i < labs.length; i++) if (labs[i].className === 'p-lab' && labs[i].textContent === "This winter's usage") at = labs[i].parentNode;
+    if (!at) return;
+    var spent = amount('f-spent'), before = amount('f-baseline'), after = amount('f-newSeason');
+    var saved = before !== null && after !== null ? before - after : null, ok = spent !== null && saved !== null && saved > 0;
+    var r1 = printRow('Saved this season', ok ? dollars(saved) : ''), r2 = printRow('Payback', ok ? 'about ' + (Math.round(spent / saved * 10) / 10) + ' seasons' : '');
+    r1.id = 'wp-payback-print';
+    at.parentNode.insertBefore(r2, at.nextSibling); at.parentNode.insertBefore(r1, r2);
+  }
+  if (window.ZFGWorksheet) window.ZFGWorksheet.afterPrint = printPayback;
+  printPayback();
 })();
 </script>
 </body>

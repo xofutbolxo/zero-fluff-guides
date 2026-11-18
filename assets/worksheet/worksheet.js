@@ -620,8 +620,21 @@
     return h('div', { 'class': 'p-row' }, [h('span', { 'class': 'p-lab', text: label }), h('span', { 'class': 'p-line', text: value || '' })]);
   }
   function blankRows(n) { return n ? 2 : 8; }
+  function hasProjection(sec) {
+    for (var i = 0; i < (sec.fields || []).length; i++) if (sec.fields[i].type === 'projection') return true;
+    return false;
+  }
+  function pBox(label, ticked) {   // a tick box to fill in by hand (ticked = already done on screen)
+    return h('div', { 'class': 'p-check' }, [h('span', { 'class': 'p-box', text: ticked ? '✓' : '' }), h('span', { 'class': 'p-clab', text: label })]);
+  }
+  function pList(f) {   // the list's own label, then one numbered full-width write-in line per item
+    var v = state[f.key] || [], box = h('div', { 'class': 'p-list' }, [h('div', { 'class': 'p-lhead', text: f.label })]);
+    for (var i = 0; i < (f.count || 0); i++) box.appendChild(h('div', { 'class': 'p-row' }, [h('span', { 'class': 'p-num', text: (i + 1) + '.' }),
+      h('span', { 'class': 'p-line', text: v[i] || '' })]));
+    return box;
+  }
   function buildPaperPrint() {
-    var el = document.getElementById('ws-print'), p = plan();
+    var el = document.getElementById('ws-print'), p = plan(), X = BOOK.printExtras || {};
     clear(el); el.className = 'paper';
     el.appendChild(h('h1', { text: BOOK.title + ': Worksheets' }));
     el.appendChild(h('div', { 'class': 'p-sub', text: (BOOK.subtitle ? BOOK.subtitle + '. ' : '') + 'By ' + BOOK.author + '.' }));
@@ -630,7 +643,7 @@
         h('div', { 'class': 'p-step', text: 'Zero Fluff: ' + sec.step })]);
       var isDebts = false, isSorted = false;
       for (var j = 0; j < (sec.fields || []).length; j++) { if (sec.fields[j].type === 'debts') isDebts = true; if (sec.fields[j].type === 'debtsSorted') isSorted = sec.fields[j]; }
-      if (sec.id === BOOK.planSection) {
+      if (sec.id === BOOK.planSection && hasProjection(sec)) {
         if (p.ok) {
           var r = p.run;
           div.appendChild(h('p', { text: 'Projected debt-free date: ' + (r.months ? monthLabel(addMonths(p.start, r.months - 1)) + ', ' + duration(r.months) + ' from ' + monthLabel(p.start) + ', paying ' + money(r.budget) + ' a month. Interest: about ' + money(r.interest) + '.' : 'not within 50 years.') }));
@@ -649,19 +662,33 @@
           h('span', { 'class': 'p-line', text: o < sd.length ? sd[o].name + ' (' + money(sd[o].balance) + ')' : '' })]));
         div.appendChild(ol);
       }
-      if (sec.id !== BOOK.planSection) {
-        var rows = answerRows(sec, true);
-        for (var k = 0; k < rows.length; k++) {
-          if ((isDebts && rows[k][0] === 'Debts') || (isSorted && isSorted.order !== 'method' && rows[k][0] === (isSorted.summary || 'Order'))) continue;
-          div.appendChild(pLine(rows[k][0], rows[k][1]));
-          // An empty method-ordered payoff list (Ch 3) gets a second write-in line, like Plan at a Glance.
-          if (isSorted && isSorted.order === 'method' && rows[k][0] === (isSorted.summary || 'Order') && !rows[k][1]) div.appendChild(pLine('', ''));
+      if (!(sec.id === BOOK.planSection && hasProjection(sec))) {
+        for (var fi = 0; fi < (sec.fields || []).length; fi++) {
+          var f = sec.fields[fi];
+          if (f.type === 'summary' || !shown(f)) continue;
+          // Per-book extras (BOOK.printExtras): safety notes, tick boxes, numbered list lines.
+          if (f.type === 'note') { if (X.notes) div.appendChild(h('p', { 'class': 'p-note', text: f.text })); continue; }
+          if (f.type === 'checkbox' && X.checkboxes === 'box' && f.summary !== false) { div.appendChild(pBox(f.label, state[f.key])); continue; }
+          if (f.type === 'list' && X.lists === 'numbered') { div.appendChild(pList(f)); continue; }
+          var rows = answerRows({ fields: [f] }, true);
+          for (var k = 0; k < rows.length; k++) {
+            if ((isDebts && rows[k][0] === 'Debts') || (isSorted && isSorted.order !== 'method' && rows[k][0] === (isSorted.summary || 'Order'))) continue;
+            var row = pLine(rows[k][0], rows[k][1]);
+            if (f.type === 'textarea') row.className += ' p-text';
+            div.appendChild(row);
+            // An empty method-ordered payoff list (Ch 3) gets a second write-in line, like Plan at a Glance.
+            if (isSorted && isSorted.order === 'method' && rows[k][0] === (isSorted.summary || 'Order') && !rows[k][1]) div.appendChild(pLine('', ''));
+            // An empty multi-line box gets as many write-in lines as it has rows on screen (at least 2).
+            if (f.type === 'textarea' && !rows[k][1]) for (var e = 1; e < Math.max(f.rows || 3, 2); e++) div.appendChild(pLine('', ''));
+          }
         }
       }
       el.appendChild(div);
     }
     el.appendChild(h('div', { 'class': 'p-foot', text: 'zerofluffguides.com/tools/' + BOOK.slug + '. Your answers are stored only in your own browser.' }));
     el.appendChild(h('div', { 'class': 'p-copy', text: COPYRIGHT }));
+    // Optional page hook: a book page's own script can add to the print view right after each rebuild.
+    if (typeof window.ZFGWorksheet.afterPrint === 'function') { try { window.ZFGWorksheet.afterPrint(el); } catch (e) {} }
   }
   function paperTable(ds, blanks, extraCol, extraHead) {
     var cols = extraCol ? ['6%', '34%', '16%', '11%', '15%', '18%'] : ['7%', '43%', '18%', '13%', '19%'], cg = h('colgroup');
