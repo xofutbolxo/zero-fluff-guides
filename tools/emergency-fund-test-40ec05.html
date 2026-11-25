@@ -429,6 +429,8 @@
 /* This page only (the shared template is unchanged): the Emergency Fund numbers.
    Chapter 2: essentials total, share of take-home pay, six-month target (6 x essentials).
    Chapter 3: what's left after the $1,000 starter fund and how many months it takes at your monthly amount.
+   Chapter 3 also: the full build including the time to finish the Chapter 4 starter fund (to go / moved each month, rounded up; 0 once at $1,000).
+   Chapter 4: "Starter fund saved so far" is pre-filled from Chapter 1 "Savings you have now" (capped at $1,000) while it is empty; the reader can edit it.
    Chapter 8: the two transfers added up. Plan at a Glance: the same figures in one line.
    Plain ES5, like the template. */
 (function () {
@@ -457,6 +459,9 @@
     o.per = per;
     o.months = o.left !== null && per > 0 ? Math.ceil(o.left / per) : null;
     o.exact = o.left !== null && per > 0 ? Math.round(o.left / per * 10) / 10 : null;
+    var ss = amount('starterSaved'), sm = amount('starterMonthly'), sLeft = Math.max(0, 1000 - (ss > 0 ? ss : 0));
+    o.starterMonths = sLeft <= 0 ? 0 : (sm > 0 ? Math.ceil(sLeft / sm) : null);
+    o.total = o.months !== null && o.starterMonths !== null ? o.months + o.starterMonths : null;
     var c = amount('autoCore'), s = amount('autoSide');
     o.transfers = c !== null || s !== null ? (c || 0) + (s || 0) : null;
     return o;
@@ -483,7 +488,8 @@
       '. Six-month target: 6 x ' + dollars(o.ess) + ' = ' + dollars(o.target) + '.';
     if (o.target && o.months !== null) t.timeline = 'Still to save after the ' + (o.base > 1000 ? dollars(o.base) + ' you already have' : '$1,000 starter fund') + ': ' +
       dollars(o.left) + '. At ' + dollars(o.per) + ' a month, that takes about ' + o.months + ' month' + (o.months === 1 ? '' : 's') +
-      ' (' + dollars(o.left) + ' ÷ ' + dollars(o.per) + ' = ' + o.exact + ', rounded up).';
+      ' (' + dollars(o.left) + ' ÷ ' + dollars(o.per) + ' = ' + o.exact + ', rounded up).' +
+      (o.total !== null ? ' Add the time to finish your $1,000 starter fund, and the full build runs about ' + o.total + ' month' + (o.total === 1 ? '' : 's') + '.' : '');
     else if (o.target) t.timeline = 'Still to save after the ' + (o.base > 1000 ? dollars(o.base) + ' you already have' : '$1,000 starter fund') + ': ' + dollars(o.left) + '. Enter a monthly amount to see your timeline.';
     if (o.transfers !== null) t.transfers = 'Going to the fund each month: ' + dollars(o.transfers) + '.' +
       (o.per > 0 && Math.round(o.per) !== Math.round(o.transfers) ? ' Your Chapter 3 plan uses ' + dollars(o.per) + '.' : '');
@@ -504,12 +510,33 @@
     set(line('ef-glance', '#conclusion'), t.glance);
     busy = false;
   }
+  // Chapter 4 pre-fill: while "Starter fund saved so far" is empty (or still holds the page's own pre-fill), copy Chapter 1
+  // "Savings you have now", capped at $1,000. Once the reader types their own amount it is never overwritten.
+  var MARK = 'zfg-ef-starter-prefill';
+  function getMark() { try { return window.localStorage.getItem(MARK); } catch (e) { return null; } }
+  function setMark(v) { try { window.localStorage.setItem(MARK, v); } catch (e) {} }
+  var seenStarter = null;
+  function prefill() {
+    var el = document.getElementById('f-starterSaved'), have = amount('savedNow');
+    if (!el || have === null || have < 0) return;
+    var v = String(Math.min(1000, have)), cur = String(el.value).trim();
+    if (cur === v) return;
+    if (cur === '' || cur === getMark()) {
+      el.value = v; setMark(v);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+  root.addEventListener('input', function (e) { if (e.target && e.target.id === 'f-savedNow') prefill(); });
   root.addEventListener('input', refresh);
   root.addEventListener('change', refresh);
   var LINES = [['ef-target', 'discretionary'], ['ef-timeline', 'monthly'], ['ef-transfers', 'autoSide'], ['ef-glance', '#conclusion']];
   new MutationObserver(function () {
+    var st = document.getElementById('f-starterSaved');
+    if (st && st !== seenStarter) { seenStarter = st; prefill(); }
     for (var i = 0; i < LINES.length; i++) if (!document.getElementById(LINES[i][0]) && anchorFor(LINES[i][1])) { refresh(); return; }
   }).observe(root, { childList: true, subtree: true });
+  seenStarter = document.getElementById('f-starterSaved');
+  prefill();
   refresh();
 
   // Print view (paper layout): the same figures as write-in lines, filled in when the screen shows them, blank otherwise.
@@ -533,7 +560,8 @@
     var r1 = printRow('Essentials per month', o.target ? dollars(o.ess) : ''); r1.id = 'ef-print';
     after('Discretionary spending', [r1, printRow('Six-month target (6 x essentials)', o.target ? dollars(o.target) : '')]);
     after('Saving each month', [printRow('Still to save after the starter fund', o.target ? dollars(o.left) : ''),
-                                printRow('Months to reach the target', o.months !== null ? 'about ' + o.months : '')]);
+                                printRow('Months to reach the target', o.months !== null ? 'about ' + o.months : ''),
+                                printRow('Full build including the starter fund', o.total !== null ? 'about ' + o.total + ' months' : '')]);
     after('Transfer from side income', [printRow('Total each month', o.transfers !== null ? dollars(o.transfers) : '')]);
     var hs = printEl.getElementsByTagName('h2');
     for (var i = 0; i < hs.length; i++) if (hs[i].textContent === 'Your Plan at a Glance') {
