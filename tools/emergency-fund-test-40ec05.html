@@ -561,7 +561,7 @@
     after('Discretionary spending', [r1, printRow('Six-month target (6 x essentials)', o.target ? dollars(o.target) : '')]);
     after('Saving each month', [printRow('Still to save after the starter fund', o.target ? dollars(o.left) : ''),
                                 printRow('Months to reach the target', o.months !== null ? 'about ' + o.months : ''),
-                                printRow('Full build including the starter fund', o.total !== null ? 'about ' + o.total + ' months' : '')]);
+                                printRow('Months including the starter fund', o.total !== null ? 'about ' + o.total : '')]);
     after('Transfer from side income', [printRow('Total each month', o.transfers !== null ? dollars(o.transfers) : '')]);
     var hs = printEl.getElementsByTagName('h2');
     for (var i = 0; i < hs.length; i++) if (hs[i].textContent === 'Your Plan at a Glance') {
