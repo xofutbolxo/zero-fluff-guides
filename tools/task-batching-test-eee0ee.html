@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light only">
+<title>Task Batching: Worksheets | Zero Fluff Guides</title>
+<meta name="description" content="Free worksheets for Task Batching by Cole Ashford. Your answers stay on your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/worksheet/worksheet.css?v=7">
+</head>
+<body>
+<!-- One small file per book: everything book-specific is in the JSON below. The shared template is /assets/worksheet/. -->
+<div id="zfg-worksheet"></div>
+<noscript><p style="max-width:640px;margin:40px auto;padding:0 16px;font-family:Georgia,serif">This worksheet needs JavaScript turned on. Nothing is sent anywhere; your answers stay in your browser.</p></noscript>
+<script type="application/json" id="zfg-book">
+{
+ "slug": "task-batching",
+ "title": "Task Batching",
+ "subtitle": "Cutting Your Weekly To-Do List From 40 Tasks to 12",
+ "author": "Cole Ashford",
+ "niche": "Productivity",
+ "accent": "#2A4B7C",
+ "accentSoft": "#E5ECF5",
+ "planSection": "conclusion",
+ "printLayout": 2,
+ "printExtras": {
+  "notes": true,
+  "checkboxes": "box",
+  "lists": "numbered"
+ },
+ "intro": "One section for each chapter. The links in the book jump straight to the matching section. Fill in what you have; the numbers update as you type and your answers save on this device.",
+ "sections": [
+  {
+   "id": "ch1",
+   "label": "Chapter 1",
+   "short": "Ch 1",
+   "title": "Why 40 Tasks a Week Is Too Many",
+   "step": "Count every separate item on your current weekly to-do list, exactly as written, and write that total at the top of the page.",
+   "fields": [
+    {
+     "type": "number",
+     "key": "startCount",
+     "label": "Separate items on your weekly to-do list, exactly as written",
+     "summary": "Items at the start",
+     "narrow": true,
+     "placeholder": "e.g. 40"
+    },
+    {
+     "type": "checkbox",
+     "key": "countWritten",
+     "label": "Total written at the top of the page",
+     "summary": "Total written down"
+    }
+   ]
+  },
+  {
+   "id": "ch2",
+   "label": "Chapter 2",
+   "short": "Ch 2",
+   "title": "What Task Batching Is and What It Is Not",
+   "step": "Mark every item on your current list that has a fixed time, a deadline too close to wait for a batch, or needs more than 90 minutes of uninterrupted work, because those items stay standalone.",
+   "fields": [
+    {
+     "type": "number",
+     "key": "standaloneMarked",
+     "label": "Items you marked standalone",
+     "summary": "Marked standalone",
+     "narrow": true,
+     "placeholder": "e.g. 8"
+    },
+    {
+     "type": "checkbox",
+     "key": "standaloneDone",
+     "label": "Every standalone item on your list is marked",
+     "summary": "All marked"
+    }
+   ]
+  },
+  {
+   "id": "ch3",
+   "label": "Chapter 3",
+   "short": "Ch 3",
+   "title": "Log Every Task for 5 Working Days",
+   "step": "Starting with your next task, record every task you do, along with its start time and duration, for 5 working days, without changing how you work.",
+   "fields": [
+    {
+     "type": "checkbox",
+     "key": "logDone",
+     "label": "Five working days logged, every task with its start time and duration",
+     "summary": "Log complete"
+    },
+    {
+     "type": "number",
+     "key": "loggedTasks",
+     "label": "Tasks in your log after 5 working days",
+     "summary": "Tasks logged",
+     "narrow": true,
+     "placeholder": "e.g. 40"
+    },
+    {
+     "type": "number",
+     "key": "avgMinutes",
+     "label": "Average minutes per task",
+     "summary": "Average minutes",
+     "narrow": true,
+     "placeholder": "e.g. 30"
+    },
+    {
+     "type": "number",
+     "key": "weekHours",
+     "label": "Hours you work in a week",
+     "summary": "Hours worked",
+     "narrow": true,
+     "placeholder": "e.g. 40"
+    }
+   ]
+  },
+  {
+   "id": "ch4",
+   "label": "Chapter 4",
+   "short": "Ch 4",
+   "title": "Sort Tasks Into 3 to 6 Task Types",
+   "step": "Label every line in your completed task log with one of 3 to 6 task types, grouped by the mental mode each task needs rather than by project.",
+   "fields": [
+    {
+     "type": "list",
+     "key": "taskTypes",
+     "label": "Your task types (3 to 6), by mental mode, not by project",
+     "count": 6,
+     "itemLabel": "Task type",
+     "summary": "Task types"
+    },
+    {
+     "type": "checkbox",
+     "key": "logLabeled",
+     "label": "Every line in your log has a task type",
+     "summary": "Log labeled"
+    }
+   ]
+  },
+  {
+   "id": "ch5",
+   "label": "Chapter 5",
+   "short": "Ch 5",
+   "title": "Build Your First 3 Batches",
+   "step": "Schedule one recurring 60- to 90-minute block for each of your three largest task types, with a short checklist written into each block's calendar description.",
+   "fields": [
+    {
+     "type": "text",
+     "key": "batch1",
+     "label": "Batch 1: task type, day and start time",
+     "summary": "Batch 1",
+     "placeholder": "e.g. Email, Tuesday 11:00"
+    },
+    {
+     "type": "text",
+     "key": "batch2",
+     "label": "Batch 2: task type, day and start time",
+     "summary": "Batch 2",
+     "placeholder": ""
+    },
+    {
+     "type": "text",
+     "key": "batch3",
+     "label": "Batch 3: task type, day and start time",
+     "summary": "Batch 3",
+     "placeholder": ""
+    },
+    {
+     "type": "number",
+     "key": "movedTasks",
+     "label": "Tasks moved into these three batches",
+     "summary": "Tasks moved",
+     "narrow": true,
+     "placeholder": "e.g. 15"
+    },
+    {
+     "type": "checkbox",
+     "key": "checklists",
+     "label": "Short checklist written into each block's calendar description",
+     "summary": "Checklists written"
+    }
+   ]
+  },
+  {
+   "id": "ch6",
+   "label": "Chapter 6",
+   "short": "Ch 6",
+   "title": "Schedule Batches Around Your Energy",
+   "step": "Move your most demanding batch block into your highest-energy hours on the week's lightest meeting day.",
+   "fields": [
+    {
+     "type": "text",
+     "key": "peakHours",
+     "label": "Your highest-energy hours, from your log",
+     "summary": "Peak hours",
+     "placeholder": "e.g. 9:00 to 11:30"
+    },
+    {
+     "type": "text",
+     "key": "lightDay",
+     "label": "The week's lightest meeting day",
+     "summary": "Lightest meeting day",
+     "placeholder": "e.g. Thursday"
+    },
+    {
+     "type": "checkbox",
+     "key": "demandingMoved",
+     "label": "Most demanding batch block moved into those hours on that day",
+     "summary": "Demanding block moved"
+    }
+   ]
+  },
+  {
+   "id": "ch7",
+   "label": "Chapter 7",
+   "short": "Ch 7",
+   "title": "Cut, Automate and Delegate What Is Left",
+   "step": "Label every item on your current list as drop, automate, delegate or keep.",
+   "fields": [
+    {
+     "type": "number",
+     "key": "cDrop",
+     "label": "Items to drop",
+     "summary": "Drop",
+     "narrow": true,
+     "placeholder": "e.g. 4"
+    },
+    {
+     "type": "number",
+     "key": "cAuto",
+     "label": "Items to automate",
+     "summary": "Automate",
+     "narrow": true,
+     "placeholder": "e.g. 6"
+    },
+    {
+     "type": "number",
+     "key": "cDeleg",
+     "label": "Items to delegate",
+     "summary": "Delegate",
+     "narrow": true,
+     "placeholder": "e.g. 0"
+    },
+    {
+     "type": "checkbox",
+     "key": "labeled7",
+     "label": "Every item on your list labeled drop, automate, delegate or keep",
+     "summary": "All labeled"
+    }
+   ]
+  },
+  {
+   "id": "ch8",
+   "label": "Chapter 8",
+   "short": "Ch 8",
+   "title": "Merge and Trim Down to 12 Items",
+   "step": "Move every standalone item that matches one of your batches into that batch's checklist, and delete its separate line from your list.",
+   "fields": [
+    {
+     "type": "number",
+     "key": "merged",
+     "label": "Standalone items moved into a batch",
+     "summary": "Moved into a batch",
+     "narrow": true,
+     "placeholder": "e.g. 5"
+    },
+    {
+     "type": "number",
+     "key": "combined",
+     "label": "Batches folded into another batch",
+     "summary": "Batches combined",
+     "narrow": true,
+     "placeholder": "e.g. 1"
+    },
+    {
+     "type": "number",
+     "key": "taskHoursNow",
+     "label": "Task time per week now, in hours",
+     "summary": "Task hours now",
+     "narrow": true,
+     "placeholder": "e.g. 14"
+    },
+    {
+     "type": "text",
+     "key": "recoveredJob",
+     "label": "Job for your recovered hours",
+     "summary": "Recovered hours go to",
+     "placeholder": "e.g. Project milestone work"
+    }
+   ]
+  },
+  {
+   "id": "ch9",
+   "label": "Chapter 9",
+   "short": "Ch 9",
+   "title": "Protect Your Batches From Interruptions",
+   "step": "Save a deferral script that names when your next batch runs as a text shortcut on your phone and computer.",
+   "fields": [
+    {
+     "type": "text",
+     "key": "answerWindows",
+     "label": "Your answer windows for email, calls and chat",
+     "summary": "Answer windows",
+     "placeholder": "e.g. 11:00 and 3:30"
+    },
+    {
+     "type": "textarea",
+     "key": "deferral",
+     "label": "Your deferral script (under 30 words)",
+     "summary": "Deferral script",
+     "placeholder": "e.g. Thanks, I've added this to my calls block tomorrow morning. If it can't wait until then, call me."
+    },
+    {
+     "type": "checkbox",
+     "key": "scriptSaved",
+     "label": "Saved as a text shortcut on your phone and computer",
+     "summary": "Script saved"
+    }
+   ]
+  },
+  {
+   "id": "ch10",
+   "label": "Chapter 10",
+   "short": "Ch 10",
+   "title": "Run a 20-Minute Weekly Review and Keep Your List Short",
+   "step": "Book a recurring 20-minute weekly review at the end of your last workday, and write the four-part agenda into its calendar description.",
+   "fields": [
+    {
+     "type": "text",
+     "key": "reviewSlot",
+     "label": "Weekly review: day and time (end of your last workday)",
+     "summary": "Weekly review",
+     "placeholder": "e.g. Friday 4:30"
+    },
+    {
+     "type": "note",
+     "text": "Agenda: 5 minutes checking batches, 7 minutes on new tasks, 5 minutes setting up next week, 3 minutes counting your list."
+    },
+    {
+     "type": "checkbox",
+     "key": "agendaWritten",
+     "label": "Four-part agenda written into the calendar description",
+     "summary": "Agenda written"
+    }
+   ]
+  },
+  {
+   "id": "conclusion",
+   "label": "Conclusion · Twelve Items, Every Week",
+   "short": "Your plan",
+   "title": "Your Plan at a Glance",
+   "step": "Book a recurring 30-minute \"batch audit\" on the first workday of each month, and write this into its description: \"If my list has more than 12 items or any batch block was skipped twice, move each extra item into a batch or the drop pile.\"",
+   "fields": [
+    {
+     "type": "checkbox",
+     "key": "auditBooked",
+     "label": "Monthly 30-minute batch audit booked, with the check written into its description",
+     "summary": "Batch audit booked"
+    },
+    {
+     "type": "summary"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<script src="/assets/worksheet/worksheet.js?v=6"></script>
+<script>
+/* This page only (the shared template is unchanged): the Task Batching numbers, using the book's own steps.
+   Chapter 1: gap to the 12-item target. Chapter 3: weekly task time (tasks x average minutes) and its share of the week.
+   Chapter 5: list after the first 3 batches (log tasks - tasks moved + 3 batch items). Chapter 6: the 15% unscheduled buffer.
+   Chapter 7: list after drop / automate / delegate. Chapter 8: list after merging + reduction from the start, and hours saved.
+   Plan at a Glance: the same figures in one line. Plain ES5, like the template. */
+(function () {
+  var root = document.getElementById('zfg-worksheet');
+  if (!root || !window.MutationObserver) return;
+  function n(key) {
+    var el = document.getElementById('f-' + key);
+    var v = el ? String(el.value).replace(/[,\s]/g, '') : '';
+    return v !== '' && !isNaN(+v) ? +v : null;
+  }
+  function r1(x) { return Math.round(x * 10) / 10; }
+  function items(x) { return x + ' item' + (x === 1 ? '' : 's'); }
+  function hrs(x) { var v = r1(x); return v + ' hour' + (v === 1 ? '' : 's'); }
+  function figures() {
+    var o = {};
+    o.start = n('startCount');
+    o.logged = n('loggedTasks'); o.avg = n('avgMinutes'); o.week = n('weekHours');
+    o.taskHours = o.logged > 0 && o.avg > 0 ? o.logged * o.avg / 60 : null;
+    o.base5 = o.logged > 0 ? o.logged : (o.start > 0 ? o.start : null);
+    var moved = n('movedTasks');
+    o.after5 = o.base5 !== null && moved !== null && moved >= 0 && moved <= o.base5 ? o.base5 - moved + 3 : null;
+    o.buffer = o.week > 0 ? o.week * 0.15 : null;
+    var d = n('cDrop'), a = n('cAuto'), g = n('cDeleg');
+    o.cut7 = (d || 0) + (a || 0) + (g || 0);
+    o.after7 = o.after5 !== null && (d !== null || a !== null || g !== null) ? Math.max(0, o.after5 - o.cut7) : null;
+    var m = n('merged'), c = n('combined');
+    o.after8 = o.after7 !== null && (m !== null || c !== null) ? Math.max(0, o.after7 - (m || 0) - (c || 0)) : null;
+    o.now = o.after8 !== null ? o.after8 : (o.after7 !== null ? o.after7 : o.after5);
+    o.hoursNow = n('taskHoursNow');
+    return o;
+  }
+  function anchorFor(afterKey) {
+    if (afterKey.charAt(0) === '#') { var sec = document.getElementById(afterKey.slice(1)); return sec ? sec.querySelector('.ws-field') : null; }
+    return document.getElementById('f-' + afterKey);
+  }
+  function line(id, afterKey) {
+    var el = document.getElementById(id);
+    if (el) return el;
+    var anchor = anchorFor(afterKey), field = anchor;
+    while (field && field.parentNode && !/\bws-field\b/.test(field.className || '')) field = field.parentNode;
+    if (!field || !field.parentNode) return null;
+    el = document.createElement('p'); el.id = id; el.className = 'ws-note'; el.setAttribute('aria-live', 'polite');
+    field.parentNode.insertBefore(el, field.nextSibling);
+    return el;
+  }
+  function set(el, text) { if (!el) return; el.textContent = text || ''; el.style.display = text ? '' : 'none'; }
+  function cut(from, to) { return from > to ? ' That is ' + (from - to) + ' fewer than the ' + from + ' you started with (' + Math.round((from - to) / from * 100) + '% shorter).' : ''; }
+  function texts(o) {
+    var t = {};
+    if (o.start > 0) t.gap = o.start > 12 ? 'Target: about 12 items, ' + (o.start - 12) + ' fewer than now (' + Math.round((o.start - 12) / o.start * 100) + '% shorter).' : 'Your list is already at 12 items or fewer.';
+    if (o.taskHours !== null) t.time = 'Task time: ' + o.logged + ' tasks x ' + o.avg + ' minutes = ' + hrs(o.taskHours) + ' a week' + (o.week > 0 ? ' (' + Math.round(o.taskHours / o.week * 100) + '% of your ' + o.week + '-hour week).' : '.');
+    if (o.after5 !== null) t.l5 = 'Your list now: ' + o.base5 + ' - ' + n('movedTasks') + ' tasks moved + 3 batches = ' + items(o.after5) + '.';
+    if (o.buffer !== null) t.buf = 'Keep 15% of your week unscheduled: 15% of ' + o.week + ' hours = ' + hrs(o.buffer) + '.';
+    if (o.after7 !== null) t.l7 = 'Your list now: ' + o.after5 + ' - ' + o.cut7 + ' dropped, automated or delegated = ' + items(o.after7) + '.';
+    if (o.after8 !== null) t.l8 = 'Your list now: ' + items(o.after8) + '.' + (o.start > 0 ? cut(o.start, o.after8) : '');
+    if (o.taskHours !== null && o.hoursNow > 0) t.saved = 'Task time: from ' + hrs(o.taskHours) + ' to ' + hrs(o.hoursNow) + ' a week' + (o.taskHours > o.hoursNow ? ', about ' + hrs(o.taskHours - o.hoursNow) + ' saved.' : '.');
+    var gl = [];
+    if (o.start > 0 && o.now !== null) gl.push('List: ' + o.start + ' items at the start, ' + o.now + ' now');
+    else if (o.start > 0) gl.push('List: ' + o.start + ' items at the start');
+    if (o.taskHours !== null) gl.push('task time ' + hrs(o.taskHours) + (o.hoursNow > 0 ? ' → ' + hrs(o.hoursNow) : '') + ' a week');
+    if (o.buffer !== null) gl.push('buffer ' + hrs(o.buffer));
+    if (gl.length) t.glance = gl.join(' · ') + '.';
+    return t;
+  }
+  var LINES = [['tb-gap', 'startCount', 'gap'], ['tb-time', 'weekHours', 'time'], ['tb-l5', 'movedTasks', 'l5'], ['tb-buf', 'lightDay', 'buf'],
+               ['tb-l7', 'cDeleg', 'l7'], ['tb-l8', 'combined', 'l8'], ['tb-saved', 'taskHoursNow', 'saved'], ['tb-glance', '#conclusion', 'glance']];
+  var busy = false;
+  function refresh() {
+    if (busy) return; busy = true;
+    var t = texts(figures());
+    for (var i = 0; i < LINES.length; i++) set(line(LINES[i][0], LINES[i][1]), t[LINES[i][2]]);
+    busy = false;
+  }
+  root.addEventListener('input', refresh);
+  root.addEventListener('change', refresh);
+  new MutationObserver(function () {
+    for (var i = 0; i < LINES.length; i++) if (!document.getElementById(LINES[i][0]) && anchorFor(LINES[i][1])) { refresh(); return; }
+  }).observe(root, { childList: true, subtree: true });
+  refresh();
+
+  // Print view (paper layout): the same figures as write-in lines, filled in when the screen shows them, blank otherwise.
+  var printEl = document.getElementById('ws-print');
+  function printRow(label, value) {
+    var row = document.createElement('div'), lab = document.createElement('span'), val = document.createElement('span');
+    row.className = 'p-row'; lab.className = 'p-lab'; val.className = 'p-line';
+    lab.textContent = label; val.textContent = value || '';
+    row.appendChild(lab); row.appendChild(val);
+    return row;
+  }
+  function after(labelText, rows) {
+    var labs = printEl.getElementsByTagName('span'), at = null;
+    for (var i = 0; i < labs.length; i++) if (labs[i].className === 'p-lab' && labs[i].textContent === labelText) at = labs[i].parentNode;
+    if (!at) return;
+    for (var j = rows.length - 1; j >= 0; j--) at.parentNode.insertBefore(rows[j], at.nextSibling);
+  }
+  function printFigures() {
+    if (!printEl || printEl.className !== 'paper' || document.getElementById('tb-print')) return;
+    var o = figures();
+    var p1 = printRow('Weekly task time', o.taskHours !== null ? hrs(o.taskHours) : ''); p1.id = 'tb-print';
+    after('Hours worked', [p1]);
+    after('Tasks moved', [printRow('List after your first 3 batches', o.after5 !== null ? items(o.after5) : '')]);
+    after('Lightest meeting day', [printRow('Unscheduled buffer (15% of your week)', o.buffer !== null ? hrs(o.buffer) : '')]);
+    after('Delegate', [printRow('List after cutting', o.after7 !== null ? items(o.after7) : '')]);
+    after('Batches combined', [printRow('List after merging', o.after8 !== null ? items(o.after8) : '')]);
+    var hs = printEl.getElementsByTagName('h2');
+    for (var i = 0; i < hs.length; i++) if (hs[i].textContent === 'Your Plan at a Glance') {
+      var sec = hs[i].parentNode;
+      sec.appendChild(printRow('Items at the start', o.start > 0 ? String(o.start) : ''));
+      sec.appendChild(printRow('Items now', o.now !== null ? String(o.now) : ''));
+      sec.appendChild(printRow('Weekly task time, before and now', o.taskHours !== null ? hrs(o.taskHours) + (o.hoursNow > 0 ? ' → ' + hrs(o.hoursNow) : '') : ''));
+      sec.appendChild(printRow('Unscheduled buffer each week', o.buffer !== null ? hrs(o.buffer) : ''));
+    }
+  }
+  if (window.ZFGWorksheet) window.ZFGWorksheet.afterPrint = printFigures;
+  printFigures();
+})();
+</script>
+</body>
+</html>
