@@ -569,6 +569,7 @@
       sec.appendChild(printRow('Six-month target', o.target ? dollars(o.target) : ''));
       sec.appendChild(printRow('Saving each month', o.per > 0 ? dollars(o.per) : ''));
       sec.appendChild(printRow('Months after the starter fund', o.months !== null ? 'about ' + o.months : ''));
+      sec.appendChild(printRow('Months including the starter fund', o.total !== null ? 'about ' + o.total : ''));
     }
   }
   if (window.ZFGWorksheet) window.ZFGWorksheet.afterPrint = printFigures;
